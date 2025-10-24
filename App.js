@@ -9,13 +9,14 @@ import CssLevel from "./src/CssLevel";
 import JavascriptLevel from "./src/JSLevel";
 import PythonLevel from "./src/PythonLevel";
 import PHPLevel from "./src/PHPLevel";
+import Q1 from './src/ListLevelHTML/Q1'
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <Stack.Navigator
           initialRouteName="GetStarted"
           screenOptions={{
@@ -30,13 +31,9 @@ export default function App() {
           <Stack.Screen name="PythonLevel" component={PythonLevel} />
           <Stack.Screen name="PHPLevel" component={PHPLevel} />
         </Stack.Navigator>
-      </NavigationContainer>
+      </NavigationContainer> */}
+      <Q1/>
       <StatusBar hidden={true} />
-      <View>
-        <Text>
-          Test
-        </Text>
-      </View>
     </View>
 
   );
