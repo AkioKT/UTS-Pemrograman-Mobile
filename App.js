@@ -32,7 +32,13 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar hidden={true} />
+      <View>
+        <Text>
+          Test
+        </Text>
+      </View>
     </View>
+
   );
 }
 
