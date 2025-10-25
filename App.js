@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useFonts } from "expo-font";
 import GetStarted from "./src/GetStarted";
 import SelectCategory from "./src/SelectCategory";
 import HtmlLevel from "./src/HtmlLevel";
@@ -9,14 +10,19 @@ import CssLevel from "./src/CssLevel";
 import JavascriptLevel from "./src/JSLevel";
 import PythonLevel from "./src/PythonLevel";
 import PHPLevel from "./src/PHPLevel";
-import Q1 from './src/ListLevelHTML/Q1'
+import Q1 from "./src/ListLevelHTML/Q1";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [loaded] = useFonts({
+    Poppins: require("./assets/fonts/Poppins-Regular.ttf"),
+  });
+  Text.defaultProps = Text.defaultProps || {};
+  Text.defaultProps.style = { fontFamily: "Poppins" };
   return (
     <View style={styles.container}>
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <Stack.Navigator
           initialRouteName="GetStarted"
           screenOptions={{
@@ -30,12 +36,11 @@ export default function App() {
           <Stack.Screen name="JavascriptLevel" component={JavascriptLevel} />
           <Stack.Screen name="PythonLevel" component={PythonLevel} />
           <Stack.Screen name="PHPLevel" component={PHPLevel} />
+          <Stack.Screen name="Q1" component={Q1} />
         </Stack.Navigator>
-      </NavigationContainer> */}
-      <Q1/>
+      </NavigationContainer>
       <StatusBar hidden={true} />
     </View>
-
   );
 }
 

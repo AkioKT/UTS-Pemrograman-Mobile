@@ -68,7 +68,7 @@ const SelectCategory = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1f1f1f" />
+      <StatusBar hidden={true} />
       <AppBar />
       <ScrollView style={styles.scrollView}>
         <View style={styles.cardsContainer}>

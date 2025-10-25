@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "text": "Apa kepanjangan dari HTML?",
+    "questionText": "What does 'HTML' stand for?",
+    "options": [
+      { "id": 1, "text": "Hyperlinks and Text Markup Language" },
+      { "id": 2, "text": "Home Tool Markup Language" },
+      { "id": 3, "text": "Hyper Text Markup Language" },
+      { "id": 4, "text": "Hyper Tool Managing Language" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 2,
+    "text": "Tag HTML apa yang digunakan untuk menampilkan paragraf?",
+    "questionText": "Which HTML tag is used to display a paragraph?",
+    "options": [
+      { "id": 1, "text": "<para>" },
+      { "id": 2, "text": "<p>" },
+      { "id": 3, "text": "<paragraph>" },
+      { "id": 4, "text": "<text>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 3,
+    "text": "Tag apa yang digunakan untuk membuat hyperlink?",
+    "questionText": "Which HTML tag is used to create a hyperlink?",
+    "options": [
+      { "id": 1, "text": "<a>" },
+      { "id": 2, "text": "<link>" },
+      { "id": 3, "text": "<href>" },
+      { "id": 4, "text": "<url>" }
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 4,
+    "text": "Apa fungsi dari tag <br>?",
+    "questionText": "What is the function of the <br> tag?",
+    "options": [
+      { "id": 1, "text": "Membuat teks tebal" },
+      { "id": 2, "text": "Membuat baris baru" },
+      { "id": 3, "text": "Menambahkan gambar" },
+      { "id": 4, "text": "Membuat hyperlink" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 5,
+    "text": "Tag apa yang digunakan untuk menampilkan gambar pada halaman web?",
+    "questionText": "Which tag is used to display an image on a webpage?",
+    "options": [
+      { "id": 1, "text": "<picture>" },
+      { "id": 2, "text": "<img>" },
+      { "id": 3, "text": "<image>" },
+      { "id": 4, "text": "<src>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 6,
+    "text": "Bagaimana cara menampilkan teks tebal di HTML?",
+    "questionText": "How do you make text bold in HTML?",
+    "options": [
+      { "id": 1, "text": "<bold>" },
+      { "id": 2, "text": "<b>" },
+      { "id": 3, "text": "<stronger>" },
+      { "id": 4, "text": "<em>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 7,
+    "text": "Tag apa yang digunakan untuk membuat daftar bernomor?",
+    "questionText": "Which tag is used to create a numbered list?",
+    "options": [
+      { "id": 1, "text": "<ul>" },
+      { "id": 2, "text": "<li>" },
+      { "id": 3, "text": "<ol>" },
+      { "id": 4, "text": "<dl>" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 8,
+    "text": "Apa perbedaan antara tag <head> dan <body>?",
+    "questionText": "What is the difference between <head> and <body> tags?",
+    "options": [
+      { "id": 1, "text": "<head> berisi konten utama, <body> berisi metadata" },
+      { "id": 2, "text": "<head> berisi metadata, <body> berisi konten utama" },
+      { "id": 3, "text": "Keduanya digunakan untuk menampilkan teks" },
+      { "id": 4, "text": "<body> hanya digunakan untuk gambar" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 9,
+    "text": "Bagaimana cara memberi judul pada tab browser di HTML?",
+    "questionText": "How do you set the title of a webpage in the browser tab?",
+    "options": [
+      { "id": 1, "text": "Dengan tag <meta>" },
+      { "id": 2, "text": "Dengan tag <header>" },
+      { "id": 3, "text": "Dengan tag <title>" },
+      { "id": 4, "text": "Dengan tag <head>" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 10,
+    "text": "Tag apa yang digunakan untuk membuat baris baru dalam tabel HTML?",
+    "questionText": "Which tag is used to create a new row in an HTML table?",
+    "options": [
+      { "id": 1, "text": "<td>" },
+      { "id": 2, "text": "<tr>" },
+      { "id": 3, "text": "<th>" },
+      { "id": 4, "text": "<table>" }
+    ],
+    "correctAnswer": 2
+  }
+]

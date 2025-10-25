@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   titleApp: {
     color: "#fff",
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: "Poppins-Regular"
   }
 });
