@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
     backgroundColor: "#1F2937",
   },
   header: {
@@ -107,6 +108,10 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     paddingHorizontal: 16,
     marginBottom: 24,
+  },
+  optionsGap: {
+
+    gap: 10,
   },
   optionsContainer: {
     paddingHorizontal: 16,

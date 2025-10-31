@@ -77,9 +77,33 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 20,
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     gap: 18,
     alignItems: "center",
+  },
+  unitSubHeader: {
+    flexDirection: "row",
+    gap: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  livesContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#EC4899",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 12,
+    gap: 4,
+  },
+  livesIcon: {
+    fontSize: 18,
+  },
+  livesText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   unitBack: {
     color: "white",
@@ -87,7 +111,7 @@ const styles = StyleSheet.create({
   },
   unitTitle: {
     color: "white",
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: "bold",
     marginBottom: 4,
   },
@@ -168,7 +192,7 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.9 }],
   },
   levelText: {
-    fontSize: 30,
+    fontSize: 24,
     fontFamily: "Poppins-Regular",
     fontWeight: 900,
   },

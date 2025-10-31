@@ -15,6 +15,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useCallback } from "react";
 import styles from "./style/AllCategoryStyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LivesContext } from "./context/LivesContext";
+import { useContext } from "react";
 
 export default function HtmlLevel() {
   const navigation = useNavigation(); // ⬅️ Ambil objek navigation tanpa props
@@ -30,6 +32,7 @@ export default function HtmlLevel() {
     { id: 9, completed: false, locked: true },
     { id: 10, completed: false, locked: true },
   ]);
+  const { lives } = useContext(LivesContext);
   useFocusEffect(
     useCallback(() => {
       const loadLevels = async () => {
@@ -78,10 +81,11 @@ export default function HtmlLevel() {
       alert("Selesaikan level sebelumnya dulu!");
       return;
     }
-
-    navigation.navigate("Q1", {
-      onFinish: () => {
-        completeLevel(levelId);
+    const screenName = `Q${levelId}`;
+    navigation.navigate("NavigationHTML", {
+      screen: screenName,
+      params: {
+        onFinish: () => completeLevel(levelId),
       },
     });
   };
@@ -102,7 +106,7 @@ export default function HtmlLevel() {
       <StatusBar hidden={true} />
       {/* Unit Header */}
       <View style={styles.unitHeader}>
-        <View>
+        <View style={styles.unitSubHeader}>
           <TouchableOpacity>
             <Ionicons
               name="chevron-back"
@@ -111,9 +115,13 @@ export default function HtmlLevel() {
               onPress={backPage}
             />
           </TouchableOpacity>
+          <View>
+            <Text style={styles.unitTitle}>HTML</Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.unitTitle}>HTML</Text>
+        <View style={styles.livesContainer}>
+          <Text style={styles.livesIcon}>❤️</Text>
+          <Text style={styles.livesText}>{lives}</Text>
         </View>
       </View>
 

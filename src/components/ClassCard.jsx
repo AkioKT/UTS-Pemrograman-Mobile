@@ -31,7 +31,7 @@ const ClassCard = ({ classData }) => {
   };
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
-    "Poppins-Bold": require("../../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -116,9 +116,9 @@ const styles = StyleSheet.create({
   },
   selectText: {
     color: "#282103",
-    fontWeight: "600",
+    // fontWeight: 600,
     fontFamily: "Poppins-Bold",
-    fontSize: 18,
+    fontSize: 16,
   },
 });
 

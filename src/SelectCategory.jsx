@@ -81,13 +81,6 @@ const SelectCategory = () => {
           ))}
         </View>
       </ScrollView>
-
-      {/* <FabButton onPress={() => console.log("Tambah Kelas")} /> */}
-      <ClassModal
-        visible={modalVisible}
-        classData={selectedClass}
-        onClose={() => setModalVisible(false)}
-      />
     </View>
   );
 };

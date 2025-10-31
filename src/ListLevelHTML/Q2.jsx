@@ -6,16 +6,12 @@ import {
   SafeAreaView,
   StatusBar,
 } from "react-native";
-import questions from "../../assets/data/HTML/Level1.json";
+import questions from "../../assets/data/HTML/Level2.json";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import styles from "../style/Q1Style";
 import CorrectAnswer from "../sounds/CorrectAnswer";
 import WrongAnswer from "../sounds/WrongAnswer";
 import ProgressBar from "../components/ProgressBar";
-import { useContext } from "react";
-import { LivesContext } from "../context/LivesContext";
-import { Scroll } from "lucide-react-native";
-import { ScrollView } from "react-native";
 
 export default function LanguageLearningScreen() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -23,7 +19,6 @@ export default function LanguageLearningScreen() {
   const [answers, setAnswers] = useState({});
   const progress = (currentQuestion + 1) / questions.length;
   const question = questions[currentQuestion];
-  const { lives, loseLife } = useContext(LivesContext);
 
   const route = useRoute();
   const navigation = useNavigation();
@@ -35,27 +30,30 @@ export default function LanguageLearningScreen() {
 
   const handleAnswerPress = (id) => setSelectedAnswer(id);
 
-  const handleCheck = async () => {
+  const handleCheck = () => {
     if (selectedAnswer === question.correctAnswer) {
       CorrectAnswer();
+
+      // simpan jawaban
       setAnswers((prev) => ({
         ...prev,
         [currentQuestion]: selectedAnswer,
       }));
 
+      // pindah ke soal berikutnya setelah delay kecil
       if (currentQuestion < questions.length - 1) {
         setTimeout(() => {
           setSelectedAnswer(null);
           setCurrentQuestion(currentQuestion + 1);
         }, 100);
       } else {
+        // semua soal selesai
         alert("🎊 Semua pertanyaan selesai!");
         if (onFinish) onFinish();
         navigation.goBack();
       }
     } else {
       WrongAnswer();
-      await loseLife(1); // 💥 Kurangi nyawa saat salah
     }
   };
 
@@ -76,8 +74,8 @@ export default function LanguageLearningScreen() {
         <ProgressBar progress={progress} />
 
         <View style={styles.livesContainer}>
-          <Text style={styles.livesIcon}>❤️</Text>
-          <Text style={styles.livesText}>{lives}</Text>
+          <Text style={styles.livesIcon}>⚡</Text>
+          <Text style={styles.livesText}>25</Text>
         </View>
       </View>
 
@@ -96,42 +94,41 @@ export default function LanguageLearningScreen() {
 
       {/* Question */}
       <Text style={styles.questionText}>{question.questionText}</Text>
-      <ScrollView style={styles.optionGap}>
-        {/* Answer Options */}
-        <View style={styles.optionsContainer}>
-          {question.options.map((option) => (
-            <TouchableOpacity
-              key={option.id}
-              style={[
-                styles.optionButton,
-                selectedAnswer === option.id && styles.optionButtonSelected,
-              ]}
-              onPress={() => handleAnswerPress(option.id)}
-            >
-              <Text
-                style={[
-                  styles.optionText,
-                  selectedAnswer === option.id && styles.optionTextSelected,
-                ]}
-              >
-                {option.text}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
 
-        {/* Check Button */}
-        <TouchableOpacity
-          style={[
-            styles.checkButton,
-            !selectedAnswer && styles.checkButtonDisabled,
-          ]}
-          onPress={handleCheck}
-          disabled={!selectedAnswer}
-        >
-          <Text style={styles.checkButtonText}>CHECK</Text>
-        </TouchableOpacity>
-      </ScrollView>
+      {/* Answer Options */}
+      <View style={styles.optionsContainer}>
+        {question.options.map((option) => (
+          <TouchableOpacity
+            key={option.id}
+            style={[
+              styles.optionButton,
+              selectedAnswer === option.id && styles.optionButtonSelected,
+            ]}
+            onPress={() => handleAnswerPress(option.id)}
+          >
+            <Text
+              style={[
+                styles.optionText,
+                selectedAnswer === option.id && styles.optionTextSelected,
+              ]}
+            >
+              {option.text}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Check Button */}
+      <TouchableOpacity
+        style={[
+          styles.checkButton,
+          !selectedAnswer && styles.checkButtonDisabled,
+        ]}
+        onPress={handleCheck}
+        disabled={!selectedAnswer}
+      >
+        <Text style={styles.checkButtonText}>CHECK</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "text": "Tag HTML apa yang digunakan untuk membuat tabel?",
+    "questionText": "Which HTML tag is used to create a table?",
+    "options": [
+      { "id": 1, "text": "<table>" },
+      { "id": 2, "text": "<tab>" },
+      { "id": 3, "text": "<tr>" },
+      { "id": 4, "text": "<list>" }
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 2,
+    "text": "Tag apa yang digunakan untuk menampilkan video di halaman web?",
+    "questionText": "Which tag is used to display a video on a webpage?",
+    "options": [
+      { "id": 1, "text": "<video>" },
+      { "id": 2, "text": "<media>" },
+      { "id": 3, "text": "<movie>" },
+      { "id": 4, "text": "<vid>" }
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 3,
+    "text": "Tag HTML apa yang digunakan untuk menampilkan daftar dengan simbol bullet?",
+    "questionText": "Which tag is used to create a bulleted list?",
+    "options": [
+      { "id": 1, "text": "<ol>" },
+      { "id": 2, "text": "<ul>" },
+      { "id": 3, "text": "<li>" },
+      { "id": 4, "text": "<list>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 4,
+    "text": "Tag HTML apa yang digunakan untuk mendefinisikan baris dalam tabel?",
+    "questionText": "Which HTML tag defines a row in a table?",
+    "options": [
+      { "id": 1, "text": "<td>" },
+      { "id": 2, "text": "<tr>" },
+      { "id": 3, "text": "<th>" },
+      { "id": 4, "text": "<table-row>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 5,
+    "text": "Tag HTML mana yang digunakan untuk menampilkan input teks dalam form?",
+    "questionText": "Which tag is used to create a text input in a form?",
+    "options": [
+      { "id": 1, "text": "<text>" },
+      { "id": 2, "text": "<input type='text'>" },
+      { "id": 3, "text": "<textbox>" },
+      { "id": 4, "text": "<form-text>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 6,
+    "text": "Atribut HTML apa yang digunakan untuk memberikan nilai unik pada elemen?",
+    "questionText": "Which attribute gives a unique identifier to an element?",
+    "options": [
+      { "id": 1, "text": "class" },
+      { "id": 2, "text": "id" },
+      { "id": 3, "text": "name" },
+      { "id": 4, "text": "key" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 7,
+    "text": "Tag HTML apa yang digunakan untuk menampilkan konten dari sumber eksternal seperti YouTube?",
+    "questionText": "Which HTML tag is used to embed external content like YouTube videos?",
+    "options": [
+      { "id": 1, "text": "<embed>" },
+      { "id": 2, "text": "<object>" },
+      { "id": 3, "text": "<iframe>" },
+      { "id": 4, "text": "<link>" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 8,
+    "text": "Atribut apa yang digunakan pada tag <img> untuk menentukan teks alternatif jika gambar tidak ditampilkan?",
+    "questionText": "Which attribute in the <img> tag provides alternative text when the image cannot be displayed?",
+    "options": [
+      { "id": 1, "text": "title" },
+      { "id": 2, "text": "alt" },
+      { "id": 3, "text": "src" },
+      { "id": 4, "text": "description" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 9,
+    "text": "Tag HTML mana yang digunakan untuk menampilkan heading utama di halaman web?",
+    "questionText": "Which tag is used to define the main heading of a webpage?",
+    "options": [
+      { "id": 1, "text": "<h1>" },
+      { "id": 2, "text": "<header>" },
+      { "id": 3, "text": "<head>" },
+      { "id": 4, "text": "<h6>" }
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 10,
+    "text": "Tag HTML apa yang digunakan untuk menampilkan area teks multiline di form?",
+    "questionText": "Which tag is used to create a multiline text area in a form?",
+    "options": [
+      { "id": 1, "text": "<textbox>" },
+      { "id": 2, "text": "<textarea>" },
+      { "id": 3, "text": "<input type='textarea'>" },
+      { "id": 4, "text": "<text>" }
+    ],
+    "correctAnswer": 2
+  }
+]
