@@ -1,31 +1,35 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons, Ionicons, Feather } from "@expo/vector-icons";
 import styles from "../style/LoginStyle";
+import listAccounts from "../../assets/data/accounts/acc.json";
+import Toast from "react-native-toast-message";
 
 export default function Login({ navigation }) {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [showLoginPassword, setShowLoginPassword] = useState(false);
-
-  const listAccount = [
-    { id: 1, username: "bahlil", password: "botak" },
-    { id: 2, username: "", password: "" },
-  ];
+  const [isValid, setIsValid] = useState(false);
 
   const handleLogin = () => {
     // Cek apakah ada akun dengan email & password yang cocok
-    const foundUser = listAccount.find(
+    const foundUser = listAccounts.find(
       (user) =>
         user.username === loginUsername && user.password === loginPassword
     );
 
     if (foundUser) {
-      Alert.alert("Login Berhasil", `Selamat datang, ${foundUser.username}!`);
+      setIsValid(false); // reset error
+      Toast.show({
+        type: "success",
+        text1: "Login Berhasil",
+        text2: `Selamat datang, ${foundUser.username}!`,
+      });
       navigation.navigate("SelectCategory");
       console.log("User:", foundUser);
     } else {
-      Alert.alert("Login Gagal", "Email atau password salah!");
+      setIsValid(true); // tampilkan error
     }
   };
 
@@ -35,10 +39,10 @@ export default function Login({ navigation }) {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
         <View style={styles.inputWrapper}>
-          <Text style={styles.inputIcon}>📧</Text>
+          <MaterialIcons name="email" size={22} style={styles.inputIcon} />
           <TextInput
             style={styles.input}
-            placeholder="Username"
+            placeholder="Example@gmail.com"
             placeholderTextColor="#9CA3AF"
             value={loginUsername}
             onChangeText={setLoginUsername}
@@ -53,7 +57,7 @@ export default function Login({ navigation }) {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Password</Text>
         <View style={styles.inputWrapper}>
-          <Text style={styles.inputIcon}>🔒</Text>
+          <Ionicons name="lock-closed" size={22} style={styles.inputIcon} />
           <TextInput
             style={styles.input}
             placeholder="Password"
@@ -69,10 +73,21 @@ export default function Login({ navigation }) {
             style={styles.eyeButton}
           >
             <Text style={styles.eyeIcon}>
-              {showLoginPassword ? "👁️" : "👁️‍🗨️"}
+              {showLoginPassword ? (
+                <Ionicons name="eye" size={24} style={styles.inputIcon} />
+              ) : (
+                <Ionicons name="eye-off" size={24} style={styles.inputIcon} />
+              )}
             </Text>
           </TouchableOpacity>
         </View>
+        {isValid && (
+          <View>
+            <Text style={{ color: "#ff3030ff" }}>
+              Email atau Password salah!
+            </Text>
+          </View>
+        )}
       </View>
 
       {/* Login Button */}

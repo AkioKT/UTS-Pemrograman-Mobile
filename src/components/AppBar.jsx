@@ -21,25 +21,6 @@ const AppBar = () => {
           <Text style={styles.titleApp}>CodeCrack</Text>
         </View>
       </View>
-
-      {/* <View style={styles.appBarRight}>
-        <TouchableOpacity
-          style={styles.livesContainer}
-          onPress={() => setLives((prev) => (prev > 0 ? prev - 1 : 0))} // contoh interaksi: klik mengurangi nyawa
-        >
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Text
-              key={index}
-              style={[
-                styles.heart,
-                { opacity: index < lives ? 1 : 0.2 }, // nyawa yang hilang jadi redup
-              ]}
-            >
-              ❤️
-            </Text>
-          ))}
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 };

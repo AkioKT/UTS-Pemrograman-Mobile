@@ -7,62 +7,27 @@ import {
   StatusBar,
 } from "react-native";
 import questions from "../../assets/data/HTML/Level1.json";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import styles from "../style/Q1Style";
-import CorrectAnswer from "../sounds/CorrectAnswer";
-import WrongAnswer from "../sounds/WrongAnswer";
 import ProgressBar from "../components/ProgressBar";
-import { useContext } from "react";
-import { LivesContext } from "../context/LivesContext";
-import { Scroll } from "lucide-react-native";
 import { ScrollView } from "react-native";
+import LifeTimer from "../components/LifeTimer";
+import CheckButton from "../components/CheckButton";
+import { questionHandlers } from "../hooks/questionHandlers";
 
 export default function LanguageLearningScreen() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [answers, setAnswers] = useState({});
-  const progress = (currentQuestion + 1) / questions.length;
-  const question = questions[currentQuestion];
-  const { lives, loseLife } = useContext(LivesContext);
-
   const route = useRoute();
-  const navigation = useNavigation();
   const { onFinish } = route.params;
 
-  // Tentukan tingkat kesulitan berdasarkan nomor soal
-  const titleDifficult =
-    currentQuestion >= 8 ? "Hard" : currentQuestion >= 5 ? "Medium" : "Easy";
-
-  const handleAnswerPress = (id) => setSelectedAnswer(id);
-
-  const handleCheck = async () => {
-    if (selectedAnswer === question.correctAnswer) {
-      CorrectAnswer();
-      setAnswers((prev) => ({
-        ...prev,
-        [currentQuestion]: selectedAnswer,
-      }));
-
-      if (currentQuestion < questions.length - 1) {
-        setTimeout(() => {
-          setSelectedAnswer(null);
-          setCurrentQuestion(currentQuestion + 1);
-        }, 100);
-      } else {
-        alert("🎊 Semua pertanyaan selesai!");
-        if (onFinish) onFinish();
-        navigation.goBack();
-      }
-    } else {
-      WrongAnswer();
-      await loseLife(1); // 💥 Kurangi nyawa saat salah
-    }
-  };
-
-  const closeButton = () => {
-    navigation.goBack();
-  };
-
+  const {
+    selectedAnswer,
+    question,
+    handleAnswerPress,
+    handleCheck,
+    closeButton,
+    titleDifficult,
+    progress,
+  } = questionHandlers(questions, onFinish);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={true} />
@@ -76,8 +41,7 @@ export default function LanguageLearningScreen() {
         <ProgressBar progress={progress} />
 
         <View style={styles.livesContainer}>
-          <Text style={styles.livesIcon}>❤️</Text>
-          <Text style={styles.livesText}>{lives}</Text>
+          <LifeTimer />
         </View>
       </View>
 
@@ -119,19 +83,10 @@ export default function LanguageLearningScreen() {
             </TouchableOpacity>
           ))}
         </View>
-
-        {/* Check Button */}
-        <TouchableOpacity
-          style={[
-            styles.checkButton,
-            !selectedAnswer && styles.checkButtonDisabled,
-          ]}
-          onPress={handleCheck}
-          disabled={!selectedAnswer}
-        >
-          <Text style={styles.checkButtonText}>CHECK</Text>
-        </TouchableOpacity>
       </ScrollView>
+
+      {/* Check Button */}
+      <CheckButton onPress={handleCheck} disabled={!selectedAnswer} />
     </SafeAreaView>
   );
 }

@@ -6,6 +6,8 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useFonts } from "expo-font";
 import { LivesProvider } from "./src/context/LivesContext";
+import * as NavigationBar from "expo-navigation-bar";
+import { useEffect } from "react";
 import GetStarted from "./src/GetStarted";
 import SelectCategory from "./src/SelectCategory";
 import HtmlLevel from "./src/HtmlLevel";
@@ -41,6 +43,10 @@ function MainDrawer() {
 }
 
 export default function App() {
+  useEffect(() => {
+    NavigationBar.setVisibilityAsync("hidden"); // sembunyikan bar bawah
+    NavigationBar.setBehaviorAsync("overlay-swipe"); // tetap bisa swipe untuk munculkan
+  }, []);
   const [loaded] = useFonts({
     Poppins: require("./assets/fonts/Poppins-Regular.ttf"),
   });

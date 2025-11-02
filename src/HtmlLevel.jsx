@@ -17,6 +17,7 @@ import styles from "./style/AllCategoryStyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LivesContext } from "./context/LivesContext";
 import { useContext } from "react";
+import LifeTimer from "./components/LifeTimer";
 
 export default function HtmlLevel() {
   const navigation = useNavigation(); // ⬅️ Ambil objek navigation tanpa props
@@ -97,7 +98,6 @@ export default function HtmlLevel() {
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
   });
-
   if (!fontsLoaded) {
     return null; // atau tampilkan splash/loading
   }
@@ -120,8 +120,7 @@ export default function HtmlLevel() {
           </View>
         </View>
         <View style={styles.livesContainer}>
-          <Text style={styles.livesIcon}>❤️</Text>
-          <Text style={styles.livesText}>{lives}</Text>
+          <LifeTimer/>
         </View>
       </View>
 

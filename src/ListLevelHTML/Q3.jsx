@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   StatusBar,
 } from "react-native";
-import questions from "../../assets/data/HTML/Level2.json";
+import questions from "../../assets/data/HTML/Level3.json";
 import { useRoute } from "@react-navigation/native";
 import styles from "../style/Q1Style";
 import ProgressBar from "../components/ProgressBar";

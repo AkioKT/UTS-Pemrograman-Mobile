@@ -24,8 +24,7 @@ const ClassCard = ({ classData }) => {
       navigation.navigate("PythonLevel");
     } else if (classData.name === "PHP") {
       navigation.navigate("PHPLevel");
-    }
-    else {
+    } else {
       console.log("Halaman belum tersedia untuk:", classData.name);
     }
   };
@@ -81,10 +80,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 2,
     borderColor: "#475569",
+    overflow: "hidden",
   },
   cardImage: {
     height: 100,
     width: 100,
+    // resizeMode: "stretch",
   },
   cardFooter: {
     width: "100%",

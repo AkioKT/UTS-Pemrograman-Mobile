@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    backgroundColor: "#020617"
+    backgroundColor: "#020617",
   },
   gradient: {
     flex: 1,
@@ -19,31 +19,45 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     flexDirection: "row",
+    // justifyContent: "center"
+    width: "100%",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderRadius: 12,
-    padding: 4,
-    marginBottom: 32,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
+    alignSelf: "center",
+    marginBottom: 20,
+    position: "relative",
+    // overflow: "hidden",
   },
+
+  slider: {
+    position: "absolute",
+    width: "50%",
+    height: 50,
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 10,
+    zIndex: 0,
+  },
+
   tab: {
     flex: 1,
-    paddingVertical: 12,
+    width: "100%",
+    height: 50,
     alignItems: "center",
-    borderRadius: 8,
+    justifyContent: "center",
+    zIndex: 1,
   },
-  tabActive: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-  },
+
   tabText: {
+    color: "#CBD5E1",
     fontSize: 16,
-    fontWeight: "600",
-    color: "#DDD6FE",
+    fontFamily: "Poppins-Regular",
   },
-  tabTextActive: {
-    color: "#FFFFFF",
-    fontWeight: "700",
+
+  activeText: {
+    color: "#CBD5E1",
+    fontFamily: "Poppins-Bold",
   },
+
   header: {
     alignItems: "center",
     marginBottom: 32,
@@ -69,10 +83,11 @@ const styles = StyleSheet.create({
     padding: 24,
     marginBottom: 24,
     borderWidth: 1,
+    gap: 20,
     borderColor: "rgba(255, 255, 255, 0.2)",
   },
   inputContainer: {
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   label: {
     fontSize: 14,
@@ -92,6 +107,7 @@ const styles = StyleSheet.create({
   inputIcon: {
     fontSize: 20,
     marginRight: 12,
+    color: "white",
   },
   input: {
     flex: 1,

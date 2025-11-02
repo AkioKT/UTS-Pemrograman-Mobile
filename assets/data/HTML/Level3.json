@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "text": "Tag HTML mana yang digunakan untuk membuat paragraf teks biasa?",
+    "questionText": "Which HTML tag is used to create a regular text paragraph?",
+    "options": [
+      { "id": 1, "text": "<para>" },
+      { "id": 2, "text": "<p>" },
+      { "id": 3, "text": "<text>" },
+      { "id": 4, "text": "<h1>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 2,
+    "text": "Untuk membuat teks menjadi miring, tag HTML yang disarankan secara semantik adalah:",
+    "questionText": "To make text italic, the semantically suggested HTML tag is:",
+    "options": [
+      { "id": 1, "text": "<i>" },
+      { "id": 2, "text": "<em>" },
+      { "id": 3, "text": "<a>" },
+      { "id": 4, "text": "<b>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 3,
+    "text": "Atribut 'alt' pada tag <img> digunakan untuk tujuan apa?",
+    "questionText": "What is the 'alt' attribute in the <img> tag used for?",
+    "options": [
+      { "id": 1, "text": "Mengubah ukuran gambar." },
+      { "id": 2, "text": "Menambahkan *border* pada gambar." },
+      { "id": 3, "text": "Menyediakan teks alternatif jika gambar tidak dapat dimuat." },
+      { "id": 4, "text": "Menentukan sumber (source) gambar." }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 4,
+    "text": "Bagian dari dokumen HTML yang berisi informasi meta dan judul halaman (yang muncul di tab browser) adalah:",
+    "questionText": "The part of the HTML document that contains meta information and the page title (which appears in the browser tab) is:",
+    "options": [
+      { "id": 1, "text": "<body>" },
+      { "id": 2, "text": "<header>" },
+      { "id": 3, "text": "<head>" },
+      { "id": 4, "text": "<section>" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 5,
+    "text": "Tag mana yang digunakan untuk membuat daftar yang berurutan (*ordered list*), ditandai dengan angka atau huruf?",
+    "questionText": "Which tag is used to create an ordered list, marked by numbers or letters?",
+    "options": [
+      { "id": 1, "text": "<ul>" },
+      { "id": 2, "text": "<li>" },
+      { "id": 3, "text": "<list>" },
+      { "id": 4, "text": "<ol>" }
+    ],
+    "correctAnswer": 4
+  },
+  {
+    "id": 6,
+    "text": "Elemen HTML mana yang merupakan elemen *inline* (tidak memulai baris baru secara *default*)?",
+    "questionText": "Which HTML element is an inline element (does not start a new line by default)?",
+    "options": [
+      { "id": 1, "text": "<div>" },
+      { "id": 2, "text": "<p>" },
+      { "id": 3, "text": "<span>" },
+      { "id": 4, "text": "<h1>" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 7,
+    "text": "Tag mana yang benar untuk membuat garis horizontal sebagai pemisah di halaman?",
+    "questionText": "Which tag is correct to create a horizontal line as a separator on the page?",
+    "options": [
+      { "id": 1, "text": "<line>" },
+      { "id": 2, "text": "<hr>" },
+      { "id": 3, "text": "<separator>" },
+      { "id": 4, "text": "<br>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 8,
+    "text": "Untuk mengelompokkan elemen pada halaman dan menerapkan gaya melalui CSS, kita sering menggunakan tag:",
+    "questionText": "To group elements on a page and apply styles via CSS, we often use the tag:",
+    "options": [
+      { "id": 1, "text": "<a>" },
+      { "id": 2, "text": "<div>" },
+      { "id": 3, "text": "<img>" },
+      { "id": 4, "text": "<tr>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 9,
+    "text": "Apa nama atribut yang digunakan untuk memberikan identifikasi unik pada sebuah elemen HTML (hanya boleh satu per halaman)?",
+    "questionText": "What is the name of the attribute used to give a unique identification to an HTML element (only one allowed per page)?",
+    "options": [
+      { "id": 1, "text": "class" },
+      { "id": 2, "text": "style" },
+      { "id": 3, "text": "data" },
+      { "id": 4, "text": "id" }
+    ],
+    "correctAnswer": 4
+  },
+  {
+    "id": 10,
+    "text": "Tag HTML mana yang digunakan untuk membuat sebuah *list item* (item daftar) di dalam <ul> atau <ol>?",
+    "questionText": "Which HTML tag is used to create a list item inside <ul> or <ol>?",
+    "options": [
+      { "id": 1, "text": "<li>" },
+      { "id": 2, "text": "<list>" },
+      { "id": 3, "text": "<item>" },
+      { "id": 4, "text": "<ln>" }
+    ],
+    "correctAnswer": 1
+  }
+]

@@ -1,8 +1,7 @@
 import React from "react";
 import { Audio } from "expo-av";
-
 const playWrongAnswer = async () => {
-  console.log("Memuat suara...");
+  console.log("Memuat suara salah");
   const { sound } = await Audio.Sound.createAsync(
     require("../../assets/sounds/Wrong_Answer.mp3")
   );

@@ -1,0 +1,58 @@
+import React, { useContext, useEffect, useState } from "react";
+import { Text, View } from "react-native";
+import { LivesContext } from "../context/LivesContext";
+import { useFonts } from "expo-font";
+
+export default function LifeTimer() {
+  const { lives, nextLifeTime } = useContext(LivesContext);
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  const [fontsLoaded] = useFonts({
+    Poppins: require("../../assets/fonts/Poppins-Regular.ttf"),
+  });
+
+  useEffect(() => {
+    if (!nextLifeTime) {
+      setTimeLeft("");
+      return;
+    }
+
+    const interval = setInterval(() => {
+      const diff = nextLifeTime - Date.now();
+
+      if (diff <= 0) {
+        setTimeLeft("00:00");
+        return;
+      }
+
+      const minutes = Math.floor(diff / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+
+      setTimeLeft(
+        `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [nextLifeTime]);
+
+  if (lives >= 5) {
+    return (
+      <Text style={{ color: "#fff", fontSize: 20, fontFamily: "Poppins" }}>
+        ❤️ {lives}/5
+      </Text>
+    );
+  }
+
+  if (!fontsLoaded) return null;
+
+  return (
+    <View>
+      <Text style={{ color: "#fff", fontSize: 20, fontFamily: "Poppins" }}>
+        ❤️ {lives}
+      </Text>
+    </View>
+  );
+}

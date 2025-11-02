@@ -64,12 +64,12 @@
     "text": "Bagaimana cara menampilkan teks tebal di HTML?",
     "questionText": "How do you make text bold in HTML?",
     "options": [
-      { "id": 1, "text": "<bold>" },
-      { "id": 2, "text": "<b>" },
+      { "id": 1, "text": "<div>" },
+      { "id": 2, "text": "<em>" },
       { "id": 3, "text": "<stronger>" },
-      { "id": 4, "text": "<em>" }
+      { "id": 4, "text": "<b>" }
     ],
-    "correctAnswer": 2
+    "correctAnswer": 4
   },
   {
     "id": 7,
@@ -113,10 +113,10 @@
     "questionText": "Which tag is used to create a new row in an HTML table?",
     "options": [
       { "id": 1, "text": "<td>" },
-      { "id": 2, "text": "<tr>" },
+      { "id": 2, "text": "<table>" },
       { "id": 3, "text": "<th>" },
-      { "id": 4, "text": "<table>" }
+      { "id": 4, "text": "<tr>" }
     ],
-    "correctAnswer": 2
+    "correctAnswer": 4
   }
 ]

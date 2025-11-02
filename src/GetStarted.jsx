@@ -9,7 +9,7 @@
  * cd ios && pod install
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -25,9 +25,23 @@ import { LinearGradient } from "expo-linear-gradient";
 import Login from "../src/page/Login";
 import SignUp from "../src/page/SignUp";
 import styles from "./style/LoginStyle";
-// "#581C87", "#3730A3", "#1E3A8A"
-export default function GetStarted({navigation}) {
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
+export default function GetStarted({ navigation }) {
   const [isLogin, setIsLogin] = useState(true);
+  const highlightPos = useSharedValue(0);
+
+  useEffect(() => {
+    highlightPos.value = withTiming(isLogin ? 0 : 1, { duration: 200 });
+  }, [isLogin]);
+
+  // Gerakkan highlight
+  const highlightAnim = useAnimatedStyle(() => ({
+    transform: [{ translateX: highlightPos.value * 155 }], // 100 = width tab
+  }));
 
   return (
     <View style={styles.container}>
@@ -43,21 +57,27 @@ export default function GetStarted({navigation}) {
         >
           {/* Toggle Tabs */}
           <View style={styles.tabContainer}>
+            {/* Highlight Background Slider */}
+            <Animated.View style={[styles.slider, highlightAnim]} />
+
+            {/* Sign In */}
             <TouchableOpacity
               onPress={() => setIsLogin(true)}
               activeOpacity={0.8}
-              style={[styles.tab, isLogin && styles.tabActive]}
+              style={styles.tab}
             >
-              <Text style={[styles.tabText, isLogin && styles.tabTextActive]}>
+              <Text style={[styles.tabText, isLogin && styles.activeText]}>
                 Sign In
               </Text>
             </TouchableOpacity>
+
+            {/* Sign Up */}
             <TouchableOpacity
               onPress={() => setIsLogin(false)}
               activeOpacity={0.8}
-              style={[styles.tab, !isLogin && styles.tabActive]}
+              style={styles.tab}
             >
-              <Text style={[styles.tabText, !isLogin && styles.tabTextActive]}>
+              <Text style={[styles.tabText, !isLogin && styles.activeText]}>
                 Sign Up
               </Text>
             </TouchableOpacity>
@@ -78,10 +98,10 @@ export default function GetStarted({navigation}) {
 
           {/* LOGIN FORM */}
           {isLogin ? (
-            <Login navigation={navigation}/>
+            <Login navigation={navigation} />
           ) : (
             /* SIGN UP FORM */
-            <SignUp navigation={navigation}/>
+            <SignUp navigation={navigation} />
           )}
         </ScrollView>
       </KeyboardAvoidingView>

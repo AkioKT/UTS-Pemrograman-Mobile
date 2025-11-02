@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { MaterialIcons, Ionicons, Feather } from "@expo/vector-icons";
 import styles from "../style/LoginStyle";
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -21,7 +22,7 @@ export default function SignUp() {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Full Name</Text>
         <View style={styles.inputWrapper}>
-          <Text style={styles.inputIcon}>👤</Text>
+          <Feather name="user" style={styles.inputIcon}/>
           <TextInput
             style={styles.input}
             placeholder="Your name"
@@ -38,7 +39,7 @@ export default function SignUp() {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
         <View style={styles.inputWrapper}>
-          <Text style={styles.inputIcon}>📧</Text>
+          <MaterialIcons name="email" size={22} style={styles.inputIcon} />
           <TextInput
             style={styles.input}
             placeholder="your@email.com"
@@ -56,7 +57,7 @@ export default function SignUp() {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Password</Text>
         <View style={styles.inputWrapper}>
-          <Text style={styles.inputIcon}>🔒</Text>
+          <Ionicons name="lock-closed" size={22} style={styles.inputIcon} />
           <TextInput
             style={styles.input}
             placeholder="Create a password"
@@ -82,7 +83,7 @@ export default function SignUp() {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Confirm Password</Text>
         <View style={styles.inputWrapper}>
-          <Text style={styles.inputIcon}>🔐</Text>
+          <Ionicons name="lock-closed" size={22} style={styles.inputIcon} />
           <TextInput
             style={styles.input}
             placeholder="Confirm your password"
