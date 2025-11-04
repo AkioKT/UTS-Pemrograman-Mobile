@@ -1,14 +1,11 @@
 // Anda perlu membuat file yang mengekspor semua data JSON
 // Misalnya: src/assets/data/HTML/allLevels.js
 
-import Level1Questions from "./Level1.json";
-import Level2Questions from "./Level2.json";
-import Level3Questions from "./Level3.json";
-import Level4Questions from "./Level4.json";
-
-export const allLevelsQuestions = {
-  1: Level1Questions,
-  2: Level2Questions,
-  3: Level3Questions,
-  4: Level4Questions,
+export const allLevels = {
+  1: require("./Level1.json"),
+  2: require("./Level2.json"),
+  3: require("./Level3.json"),
+  4: require("./Level4.json"),
 };
+
+export default allLevels;

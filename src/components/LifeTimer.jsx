@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { LivesContext } from "../context/LivesContext";
 import { useFonts } from "expo-font";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function LifeTimer() {
   const { lives, nextLifeTime } = useContext(LivesContext);
@@ -40,8 +41,8 @@ export default function LifeTimer() {
 
   if (lives >= 5) {
     return (
-      <Text style={{ color: "#fff", fontSize: 20, fontFamily: "Poppins" }}>
-        ❤️ {lives}/5
+      <Text style={{ color: "#ff4b4bff", fontSize: 18, fontFamily: "Poppins" }}>
+        ❤️ {lives}
       </Text>
     );
   }
@@ -49,9 +50,22 @@ export default function LifeTimer() {
   if (!fontsLoaded) return null;
 
   return (
-    <View>
-      <Text style={{ color: "#fff", fontSize: 20, fontFamily: "Poppins" }}>
-        ❤️ {lives}
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "red",
+      }}
+    >
+      <FontAwesome name="heart" size={24} color="#fff" />
+      <Text
+        style={{
+          color: "#ff4b4bff",
+          fontSize: 18,
+          fontFamily: "Poppins",
+        }}
+      >
+        {lives}
       </Text>
     </View>
   );

@@ -11,9 +11,9 @@ import { Svg, Polyline, Path } from "react-native-svg";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import styles from "./style/LevelStyle";
+import styles from "../../../../style/LevelStyle";
 
-export default function PythonLevel() {
+export default function PHPLevel() {
   const [levels, setLevels] = useState([
     { id: 1, completed: false },
     { id: 2, completed: false },
@@ -66,7 +66,7 @@ export default function PythonLevel() {
   // const [activeTab, setActiveTab] = useState("HTML");
 
   const [fontsLoaded] = useFonts({
-    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Regular": require("../../../../../assets/fonts/Poppins-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -88,7 +88,7 @@ export default function PythonLevel() {
           </TouchableOpacity>
         </View>
         <View>
-          <Text style={styles.unitTitle}>Python</Text>
+          <Text style={styles.unitTitle}>PHP</Text>
           <Text style={styles.unitSubtitle}>Ask for directions</Text>
         </View>
         <View style={styles.guideButton}>

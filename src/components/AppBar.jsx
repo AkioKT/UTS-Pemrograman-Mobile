@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
+import LifeTimer from "./LifeTimer";
 
 const AppBar = () => {
   // const [lives, setLives] = useState(3);
@@ -13,14 +14,10 @@ const AppBar = () => {
   }
   return (
     <View style={[styles.appBar, { fontFamily: "Poppins-Thin" }]}>
-      <View style={styles.appBarLeft}>
-        <TouchableOpacity style={styles.iconButton}>
-          <Text style={styles.menuIcon}>☰</Text>
-        </TouchableOpacity>
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleApp}>CodeCrack</Text>
-        </View>
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleApp}>CodeCrack</Text>
       </View>
+      <LifeTimer/>
     </View>
   );
 };
@@ -36,7 +33,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2, // ubah ke borderTop agar cocok untuk bottom bar
     borderColor: "#334155",
   },
-  appBarLeft: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 10 },
+  appBarLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  },
   appBarRight: { flexDirection: "row", alignItems: "center" },
   livesContainer: {
     flexDirection: "row",
@@ -54,8 +56,8 @@ const styles = StyleSheet.create({
   titleApp: {
     color: "#fff",
     fontSize: 20,
-    fontFamily: "Poppins-Regular"
-  }
+    fontFamily: "Poppins-Regular",
+  },
 });
 
 export default AppBar;

@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   livesContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#EC4899",
+    // backgroundColor: "#EC4899",
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 12,

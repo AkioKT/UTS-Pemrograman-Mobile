@@ -21,12 +21,10 @@ export default function Login({ navigation }) {
 
     if (foundUser) {
       setIsValid(false); // reset error
-      Toast.show({
-        type: "success",
-        text1: "Login Berhasil",
-        text2: `Selamat datang, ${foundUser.username}!`,
+      navigation.navigate("MainTabs", {
+        screen: "Home",
       });
-      navigation.navigate("SelectCategory");
+
       console.log("User:", foundUser);
     } else {
       setIsValid(true); // tampilkan error

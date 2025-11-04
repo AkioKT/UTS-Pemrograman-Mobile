@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, ScrollView, StatusBar, StyleSheet } from "react-native";
-import HTML from "../assets/image/HTML.png";
-import CSS from "../assets/image/CSS.png";
-import JS from "../assets/image/JS.png";
-import PHP from "../assets/image/PHP.png";
-import PYTHON from "../assets/image/PYTHON.png";
-import AppBar from "./components/AppBar";
-import ClassCard from "./components/ClassCard";
+import HTML from "../../../../assets/image/HTML.png";
+import CSS from "../../../../assets/image/CSS.png";
+import JS from "../../../../assets/image/JS.png";
+import PHP from "../../../../assets/image/PHP.png";
+import PYTHON from "../../../../assets/image/PYTHON.png";
+import AppBar from "../../../components/AppBar";
+import ClassCard from "../../../components/ClassCard";
 
 const SelectCategory = () => {
   const [classes] = useState([

@@ -11,7 +11,7 @@ import { Svg, Polyline, Path } from "react-native-svg";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import styles from "./style/LevelStyle";
+import styles from "../../../../style/LevelStyle";
 
 export default function JSLevel() {
   const [levels, setLevels] = useState([
@@ -66,7 +66,7 @@ export default function JSLevel() {
   // const [activeTab, setActiveTab] = useState("HTML");
 
   const [fontsLoaded] = useFonts({
-    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Regular": require("../../../../../assets/fonts/Poppins-Regular.ttf"),
   });
 
   if (!fontsLoaded) {

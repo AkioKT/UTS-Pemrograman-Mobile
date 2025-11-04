@@ -6,49 +6,39 @@ import {
   StatusBar,
   StyleSheet,
   TouchableOpacity,
-  Pressable,
 } from "react-native";
 import { Svg, Polyline, Path } from "react-native-svg";
 import { useFonts } from "expo-font";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { useCallback } from "react";
-import styles from "./style/AllCategoryStyle";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { LivesContext } from "./context/LivesContext";
-import { useContext } from "react";
-import LifeTimer from "./components/LifeTimer";
+import styles from "../../../../style/LevelStyle";
 
-export default function HtmlLevel() {
-  const navigation = useNavigation(); // ⬅️ Ambil objek navigation tanpa props
+export default function CssLevel() {
   const [levels, setLevels] = useState([
-    { id: 1, completed: false, locked: false }, // level 1 terbuka
-    { id: 2, completed: false, locked: true },
-    { id: 3, completed: false, locked: true },
-    { id: 4, completed: false, locked: true },
-    { id: 5, completed: false, locked: true },
-    { id: 6, completed: false, locked: true },
-    { id: 7, completed: false, locked: true },
-    { id: 8, completed: false, locked: true },
-    { id: 9, completed: false, locked: true },
-    { id: 10, completed: false, locked: true },
+    { id: 1, completed: false },
+    { id: 2, completed: false },
+    { id: 3, completed: false },
+    { id: 4, completed: false },
+    { id: 5, completed: false },
+    { id: 6, completed: false },
+    { id: 7, completed: false },
+    { id: 8, completed: false },
+    { id: 9, completed: false },
+    { id: 10, completed: false },
   ]);
-  const { lives } = useContext(LivesContext);
-  useFocusEffect(
-    useCallback(() => {
-      const loadLevels = async () => {
-        try {
-          const storedLevels = await AsyncStorage.getItem("levels");
-          if (storedLevels) {
-            setLevels(JSON.parse(storedLevels));
-          }
-        } catch (error) {
-          console.log("Error loading levels:", error);
+  useEffect(() => {
+    const loadLevels = async () => {
+      try {
+        const storedLevels = await AsyncStorage.getItem("levels");
+        if (storedLevels) {
+          setLevels(JSON.parse(storedLevels));
         }
-      };
-      loadLevels();
-    }, [])
-  );
+      } catch (error) {
+        console.log("Error loading levels:", error);
+      }
+    };
+    loadLevels();
+  }, []);
 
   // 🔹 Simpan data ke AsyncStorage
   const saveLevels = async (newLevels) => {
@@ -58,46 +48,27 @@ export default function HtmlLevel() {
       console.log("Error saving levels:", error);
     }
   };
+
   // 🔹 Fungsi menandai level selesai
   const completeLevel = (levelId) => {
-    const newLevels = levels.map((level) => {
-      // jika level saat ini diselesaikan
-      if (level.id === levelId) {
-        return { ...level, completed: true };
-      }
-      // buka level berikutnya
-      if (level.id === levelId + 1) {
-        return { ...level, locked: false };
-      }
-      return level;
-    });
+    const newLevels = levels.map((level) =>
+      level.id === levelId ? { ...level, completed: true } : level
+    );
     setLevels(newLevels);
-    saveLevels(newLevels);
+    saveLevels(newLevels); // simpan ke AsyncStorage
   };
 
-  const handleLevelPress = (levelId) => {
-    const level = levels.find((l) => l.id === levelId);
-
-    if (level.locked) {
-      alert("Selesaikan level sebelumnya dulu!");
-      return;
-    }
-    const screenName = `Q${levelId}`;
-    navigation.navigate("NavigationHTML", {
-      screen: screenName,
-      params: {
-        onFinish: () => completeLevel(levelId),
-      },
-    });
-  };
-
+  const navigation = useNavigation(); // ⬅️ Ambil objek navigation tanpa props
   const backPage = () => {
     navigation.navigate("SelectCategory");
   };
 
+  // const [activeTab, setActiveTab] = useState("HTML");
+
   const [fontsLoaded] = useFonts({
-    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Regular": require("../../../../../assets/fonts/Poppins-Regular.ttf"),
   });
+
   if (!fontsLoaded) {
     return null; // atau tampilkan splash/loading
   }
@@ -106,7 +77,7 @@ export default function HtmlLevel() {
       <StatusBar hidden={true} />
       {/* Unit Header */}
       <View style={styles.unitHeader}>
-        <View style={styles.unitSubHeader}>
+        <View>
           <TouchableOpacity>
             <Ionicons
               name="chevron-back"
@@ -115,12 +86,24 @@ export default function HtmlLevel() {
               onPress={backPage}
             />
           </TouchableOpacity>
-          <View>
-            <Text style={styles.unitTitle}>HTML</Text>
-          </View>
         </View>
-        <View style={styles.livesContainer}>
-          <LifeTimer/>
+        <View>
+          <Text style={styles.unitTitle}>CSS</Text>
+          <Text style={styles.unitSubtitle}>Ask for directions</Text>
+        </View>
+        <View style={styles.guideButton}>
+          <View style={styles.guideIcon}>
+            <View style={styles.guideGrid}>
+              <View style={styles.guideRow}>
+                <View style={styles.guideDot} />
+                <View style={styles.guideDot} />
+              </View>
+              <View style={styles.guideRow}>
+                <View style={styles.guideDot} />
+                <View style={styles.guideDot} />
+              </View>
+            </View>
+          </View>
         </View>
       </View>
 
@@ -132,17 +115,12 @@ export default function HtmlLevel() {
         {/* Completed Level */}
         <View style={styles.levelContainer}>
           {levels.map((level) => (
-            <Pressable
+            <TouchableOpacity
               key={level.id}
-              onPress={() => handleLevelPress(level.id)}
-              style={({ pressed }) => [
-                styles.levelBox,
-                pressed && styles.levelPressed, // efek aktif
-              ]}
+              style={styles.levelBox}
+              onPress={() => completeLevel(level.id)}
             >
-              {level.locked ? (
-                <Ionicons name="lock-closed" size={24} color="#171717" />
-              ) : level.completed ? (
+              {level.completed ? (
                 <Svg width="40" height="40" viewBox="0 0 24 24">
                   <Polyline
                     points="20 6 9 17 4 12"
@@ -154,7 +132,7 @@ export default function HtmlLevel() {
               ) : (
                 <Text style={styles.levelText}>{level.id}</Text>
               )}
-            </Pressable>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>

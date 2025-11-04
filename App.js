@@ -2,45 +2,23 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useFonts } from "expo-font";
 import { LivesProvider } from "./src/context/LivesContext";
 import * as NavigationBar from "expo-navigation-bar";
 import { useEffect } from "react";
 import GetStarted from "./src/GetStarted";
-import SelectCategory from "./src/SelectCategory";
-import HtmlLevel from "./src/HtmlLevel";
-import CssLevel from "./src/CssLevel";
-import JavascriptLevel from "./src/JSLevel";
-import PythonLevel from "./src/PythonLevel";
-import PHPLevel from "./src/PHPLevel";
+import SelectCategory from "./src/features/learn/screens/SelectCategory";
+import HtmlLevel from "./src/features/learn/screens/HTML/HtmlLevel";
+import CssLevel from "./src/features/learn/screens/CSS/CssLevel";
+import JavascriptLevel from "./src/features/learn/screens/Javascript/JSLevel";
+import PythonLevel from "./src/features/learn/screens/Python/PythonLevel";
+import PHPLevel from "./src/features/learn/screens/PHP/PHPLevel";
 import NavigationHTML from "./src/navigation/NavigationHTML";
+import NavbarButtom from "./src/components/NavbarBottom";
+import HomeScreen from "./src/features/home/screens/HomeScreen";
+import { ProgressProvider } from "./src/context/ProgressOverview";
 
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
-
-function HtmlTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="HtmlLevel" component={HtmlLevel} />
-      <Tab.Screen name="HtmlProgress" component={HtmlProgressScreen} />
-    </Tab.Navigator>
-  );
-}
-
-function MainDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="HTML" component={HtmlTabs} />
-      <Drawer.Screen name="CSS" component={CssLevel} />
-      <Drawer.Screen name="JavaScript" component={JavascriptLevel} />
-      <Drawer.Screen name="Python" component={PythonLevel} />
-      <Drawer.Screen name="PHP" component={PHPLevel} />
-    </Drawer.Navigator>
-  );
-}
 
 export default function App() {
   useEffect(() => {
@@ -54,26 +32,33 @@ export default function App() {
   Text.defaultProps.style = { fontFamily: "Poppins" };
   return (
     <LivesProvider>
-      <View style={styles.container}>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="GetStarted"
-            screenOptions={{
-              headerShown: false, // biar tampilan lebih bersih
-            }}
-          >
-            <Stack.Screen name="GetStarted" component={GetStarted} />
-            <Stack.Screen name="SelectCategory" component={SelectCategory} />
-            <Stack.Screen name="HtmlLevel" component={HtmlLevel} />
-            <Stack.Screen name="CssLevel" component={CssLevel} />
-            <Stack.Screen name="JavascriptLevel" component={JavascriptLevel} />
-            <Stack.Screen name="PythonLevel" component={PythonLevel} />
-            <Stack.Screen name="PHPLevel" component={PHPLevel} />
-            <Stack.Screen name="NavigationHTML" component={NavigationHTML} />
-          </Stack.Navigator>
-        </NavigationContainer>
-        <StatusBar hidden={true} />
-      </View>
+      <ProgressProvider>
+        <View style={styles.container}>
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="GetStarted"
+              screenOptions={{
+                headerShown: false, // biar tampilan lebih bersih
+              }}
+            >
+              <Stack.Screen name="GetStarted" component={GetStarted} />
+              <Stack.Screen name="SelectCategory" component={SelectCategory} />
+              <Stack.Screen name="MainTabs" component={NavbarButtom} />
+              <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen name="HtmlLevel" component={HtmlLevel} />
+              <Stack.Screen name="CssLevel" component={CssLevel} />
+              <Stack.Screen
+                name="JavascriptLevel"
+                component={JavascriptLevel}
+              />
+              <Stack.Screen name="PythonLevel" component={PythonLevel} />
+              <Stack.Screen name="PHPLevel" component={PHPLevel} />
+              <Stack.Screen name="NavigationHTML" component={NavigationHTML} />
+            </Stack.Navigator>
+          </NavigationContainer>
+          <StatusBar hidden={true} />
+        </View>
+      </ProgressProvider>
     </LivesProvider>
   );
 }

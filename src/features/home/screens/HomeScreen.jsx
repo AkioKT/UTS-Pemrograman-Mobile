@@ -1,0 +1,51 @@
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+  Image,
+  Alert,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { LivesContext } from "../../../context/LivesContext"; // sesuaikan path
+// import untuk navigasi jika perlu
+import { useNavigation } from "@react-navigation/native";
+import AppBar from "../../../components/AppBar";
+import AnnouncementBanner from "../components/AnnouncementBanner";
+import QuickResumeCard from "../components/QuickResumeCard";
+import DailyQuest from "../components/DailyQuest";
+import WeeklyChallenge from "../components/WeeklyChallenge";
+import PracticeOfTheDay from "../components/PracticeOfTheDay";
+import Leaderboard from "../components/Leaderboard";
+import ProgressOverview from "../components/ProgressOverview";
+import RecommendedCourses from "../components/RecommendedCourse";
+import CodingTips from "../components/CodingTips";
+import MascotMessage from "../components/MascotMessage";
+import styles from "../../../style/HomeScreenStyle";
+
+export default function HomeScreen() {
+  return (
+    <View style={{flex: 1}}>
+      <AppBar />
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ padding: 16 }}
+      >
+        <AnnouncementBanner />
+        <QuickResumeCard />
+        <DailyQuest />
+        <WeeklyChallenge />
+        <PracticeOfTheDay />
+        <Leaderboard />
+        <ProgressOverview />
+        <RecommendedCourses />
+        <CodingTips />
+        <MascotMessage />
+        <View style={{ height: 80 }} />
+      </ScrollView>
+    </View>
+  );
+}
