@@ -118,7 +118,8 @@ export default function HtmlLevel() {
           position: "absolute",
           width: "100%",
           height: "100%",
-          opacity: 0.2
+          opacity: 0.2,
+          
         }}
       />
       {/* Unit Header */}
