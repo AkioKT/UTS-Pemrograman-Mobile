@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     backgroundColor: "#020617",
+    position: "relative"
   },
   header: {
     backgroundColor: "#020617",

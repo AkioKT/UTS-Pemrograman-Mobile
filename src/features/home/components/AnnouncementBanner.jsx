@@ -1,19 +1,10 @@
-import styles from "../../../style/HomeScreenStyle";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-  Image,
-  Alert,
-} from "react-native";
+import { Text, TouchableOpacity, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { LivesContext } from "../../../context/LivesContext"; // sesuaikan path
 // import untuk navigasi jika perlu
 import { useNavigation } from "@react-navigation/native";
+import styles from "./styles/AnnouncementBanner";
 
 export default function AnnouncementBanner() {
   const announcements = [

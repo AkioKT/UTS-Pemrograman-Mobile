@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
   },
   cardHeader: {
-    height: 100,
+    height: 200,
     width: "100%",
     alignItems: "center",
     borderBottomWidth: 2,
@@ -83,9 +83,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   cardImage: {
-    height: 100,
-    width: 100,
-    // resizeMode: "stretch",
+    height: 250,
+    width: "100%",
   },
   cardFooter: {
     width: "100%",
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#facc15", // biru
     paddingVertical: 8,
-    borderRadius: 8,
+    borderRadius: 4,
     alignItems: "center",
     marginTop: 10,
     marginBottom: 10,

@@ -39,14 +39,6 @@ export default function LifeTimer() {
     return () => clearInterval(interval);
   }, [nextLifeTime]);
 
-  if (lives >= 5) {
-    return (
-      <Text style={{ color: "#ff4b4bff", fontSize: 18, fontFamily: "Poppins" }}>
-        ❤️ {lives}
-      </Text>
-    );
-  }
-
   if (!fontsLoaded) return null;
 
   return (
@@ -54,13 +46,15 @@ export default function LifeTimer() {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "red",
+        flexDirection: "row",
+        gap: 6,
+        // backgroundColor: "red",
       }}
     >
-      <FontAwesome name="heart" size={24} color="#fff" />
+      <FontAwesome name="heart" size={24} color="#ff4b4b" />
       <Text
         style={{
-          color: "#ff4b4bff",
+          color: "#ff4b4b",
           fontSize: 18,
           fontFamily: "Poppins",
         }}

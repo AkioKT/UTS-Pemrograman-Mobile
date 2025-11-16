@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, ScrollView, StatusBar, StyleSheet } from "react-native";
-import HTML from "../../../../assets/image/HTML.png";
-import CSS from "../../../../assets/image/CSS.png";
-import JS from "../../../../assets/image/JS.png";
-import PHP from "../../../../assets/image/PHP.png";
-import PYTHON from "../../../../assets/image/PYTHON.png";
-import AppBar from "../../../components/AppBar";
-import ClassCard from "../../../components/ClassCard";
+import HTML from "../../../../assets/image/thumbnail_html.png";
+import CSS from "../../../../assets/image/thumbnail_css.png";
+import JS from "../../../../assets/image/thumbnail_js.png";
+import PHP from "../../../../assets/image/thumbnail_php.png";
+import PYTHON from "../../../../assets/image/thumbnail_python.png";
+import AppBar from "../../../componentsglobal/AppBar";
+import ClassCard from "../../../componentsglobal/ClassCard";
 
 const SelectCategory = () => {
   const [classes] = useState([
@@ -15,35 +15,35 @@ const SelectCategory = () => {
       name: "HTML",
       code: "Hypertext Markup Language",
       image: HTML,
-      desc: `HTML (HyperText Markup Language) is the standard language used to create and structure web pages. It uses tags or elements to define different parts of a webpage such as text, images, links, tables, and videos, allowing browsers to display content correctly.`,
+      desc: `HTML is a standard markup language for creating web pages and their structure.`,
     },
     {
       id: 2,
       name: "CSS",
       code: "Cascading Style Sheet",
       image: CSS,
-      desc: "CSS (Cascading Style Sheets) is a language used to style and design web pages. It defines how HTML elements are displayed by controlling colors, fonts, spacing, and layouts. CSS helps make websites more attractive, organized, and responsive across different devices. Modern CSS also supports animations and flexible layouts using tools like Flexbox and Grid.",
+      desc: "CSS (Cascading Style Sheets) is a language used to style and design web pages.",
     },
     {
       id: 3,
       name: "Javascript",
       code: "Javascript",
       image: JS,
-      desc: "JavaScript is a powerful programming language that brings interactivity and dynamic behavior to web pages. It allows developers to create animations, handle user input, and update content without reloading the page. JavaScript works alongside HTML and CSS to build modern, responsive web applications. It can also run on servers through environments like Node.js, making it a full-stack development tool.",
+      desc: "JavaScript is a powerful programming language that brings interactivity and dynamic behavior to web pages.",
     },
     {
       id: 4,
       name: "Python",
       code: "Python",
       image: PYTHON,
-      desc: "Python is a versatile and easy-to-learn programming language widely used in web development, data science, artificial intelligence, and automation. Its simple syntax makes coding more readable and efficient. Python offers many frameworks, such as Django and Flask, which simplify web development and make it easier to build reliable, scalable applications.",
+      desc: "🐍 Python is a high-level programming language used for web development, data analysis, artificial intelligence and more.",
     },
     {
       id: 5,
       name: "PHP",
       code: "Hypertext Preprocessor",
       image: PHP,
-      desc: "PHP (Hypertext Preprocessor) is a server-side scripting language mainly used for building dynamic and database-driven websites. It can be embedded directly into HTML and is known for its ease of use and flexibility. PHP powers many popular web platforms, including WordPress, and continues to be a reliable choice for developing modern web applications.",
+      desc: "PHP is a popular server-side programming language, especially for web development.",
     },
   ]);
 

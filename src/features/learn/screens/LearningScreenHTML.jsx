@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,28 +8,59 @@ import {
   ScrollView,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import AllLevel from "../../../../../assets/data/HTML/AllLevel";
-import styles from "../../../../style/Q1Style";
-import ProgressBar from "../../../../components/ProgressBar";
-import LifeTimer from "../../../../components/LifeTimer";
-import CheckButton from "../../../../components/CheckButton";
-import { questionHandlers } from "../../../../hooks/questionHandlers";
+import AllLevel from "../../../../assets/data/HTML/AllLevel";
+import styles from "../../../style/Q1Style";
+import ProgressBar from "../../../componentsglobal/ProgressBar";
+import LifeTimer from "../../../componentsglobal/LifeTimer";
+import CheckButton from "../../../componentsglobal/CheckButton";
+import { questionHandlers } from "../../../hooks/questionHandlers";
+import { useContext } from "react";
+import { ProgressContext } from "../../../context/ProgressOverview";
+import AlertLife from "../components/AlertLife";
+import { LivesContext } from "../../../context/LivesContext";
 
 export default function LearningScreen() {
   const route = useRoute();
   const { levelId, onFinish } = route.params;
-
+  const { updateRecentActivity, updateProgress } = useContext(ProgressContext);
   const questions = AllLevel[levelId] || [];
-
+  const { lives } = useContext(LivesContext);
+  const [showAlert, setShowAlert] = useState(false);
   const {
+    currentQuestion,
     selectedAnswer,
     question,
+    setSelectedAnswer,
     handleAnswerPress,
     handleCheck,
     closeButton,
     titleDifficult,
     progress,
   } = questionHandlers(questions, onFinish);
+
+  useEffect(() => {
+    if (lives === 0) {
+      setShowAlert(true);
+    }
+  }, [lives]);
+
+  useEffect(() => {
+    updateRecentActivity({
+      course: "HTML",
+      levelId: levelId,
+      lesson: `Level ${parseInt(levelId) + 1}`,
+      progress: 0,
+    });
+  }, []);
+
+  useEffect(() => {
+    updateRecentActivity((prev) => ({
+      ...prev,
+      progress: progress,
+    }));
+
+    updateProgress("HTML", progress); // optional
+  }, [progress]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -87,6 +118,7 @@ export default function LearningScreen() {
       </ScrollView>
 
       <CheckButton onPress={handleCheck} disabled={!selectedAnswer} />
+      {showAlert && <AlertLife />}
     </SafeAreaView>
   );
 }

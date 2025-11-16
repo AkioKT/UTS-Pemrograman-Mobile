@@ -1,27 +1,18 @@
-import styles from "../../../style/HomeScreenStyle";
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-  Image,
-  Alert,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { LivesContext } from "../../../context/LivesContext"; // sesuaikan path
-// import untuk navigasi jika perlu
-import { useNavigation } from "@react-navigation/native";
-
+import { View, Text, StyleSheet } from "react-native";
+import WaveBackground from "../hooks/WaveBackground";
+import useCustomFonts from "../../../hooks/useCustomFonts";
 export default function MascotMessage() {
+  const fontsLoaded = useCustomFonts();
+  if (!fontsLoaded) return null;
   return (
-    <View style={[styles.card, styles.mascotCard]}>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        {/* <Image
-          source={require("../../../assets/image/mascot.png")}
-          style={{ width: 52, height: 52, borderRadius: 12, marginRight: 12 }}
-        /> */}
+    <View style={[styles.card]}>
+      <WaveBackground
+        height={110}
+        // colors={["#533483", "#6D44B8", "#8E5CF3"]}
+        waveHeight="185%"
+        waveOpacity={{ w1: 0.5, w2: 0.25, w3: 0.18 }}
+      />
+      <View style={{ flexDirection: "row", alignItems: "center", position: "absolute", padding: 10 }}>
         <View style={{ flex: 1 }}>
           <Text style={styles.cardTitle}>Codey says</Text>
           <Text style={styles.cardSub}>
@@ -32,3 +23,30 @@ export default function MascotMessage() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: "#0f1724",
+    borderRadius: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#1f2937",
+    overflow: "hidden"
+  },
+
+  mascotCard: {
+    backgroundColor: "#07162a",
+  },
+
+  cardTitle: {
+    color: "#f9f9f9",
+    fontSize: 30,
+    fontFamily: "Poppins-Bold"
+  },
+
+  cardSub: {
+    color: "#f9f9f9",
+    fontSize: 14,
+    fontFamily: "Poppins-Regular"
+  },
+});

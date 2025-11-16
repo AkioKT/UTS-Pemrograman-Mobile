@@ -1,11 +1,24 @@
-import React from "react";
-import { Audio } from "expo-av";
-const playWrongAnswer = async () => {
-  console.log("Memuat suara salah");
-  const { sound } = await Audio.Sound.createAsync(
-    require("../../assets/sounds/Wrong_Answer.mp3")
-  );
-  await sound.playAsync();
+import { Audio } from "expo-av"; 
+
+const playCorrectAnswer = async () => {
+  try {
+    console.log("Memuat suara benar");
+
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/Wrong_Answer.mp3")
+    );
+
+    await sound.playAsync();
+
+    // Opsional: cleanup sound setelah selesai
+    sound.setOnPlaybackStatusUpdate((status) => {
+      if (status.didJustFinish) {
+        sound.unloadAsync();
+      }
+    });
+  } catch (error) {
+    console.log("Gagal memutar audio:", error);
+  }
 };
 
-export default playWrongAnswer;
+export default playCorrectAnswer;

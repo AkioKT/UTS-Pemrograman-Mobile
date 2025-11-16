@@ -8,14 +8,15 @@ import * as NavigationBar from "expo-navigation-bar";
 import { useEffect } from "react";
 import GetStarted from "./src/GetStarted";
 import SelectCategory from "./src/features/learn/screens/SelectCategory";
-import HtmlLevel from "./src/features/learn/screens/HTML/HtmlLevel";
-import CssLevel from "./src/features/learn/screens/CSS/CssLevel";
-import JavascriptLevel from "./src/features/learn/screens/Javascript/JSLevel";
-import PythonLevel from "./src/features/learn/screens/Python/PythonLevel";
-import PHPLevel from "./src/features/learn/screens/PHP/PHPLevel";
+import HtmlLevel from "./src/features/learn/screens/HtmlLevel";
+import CssLevel from "./src/features/learn/screens/CssLevel";
+import JavascriptLevel from "./src/features/learn/screens/JSLevel";
+import PythonLevel from "./src/features/learn/screens/PythonLevel";
+import PHPLevel from "./src/features/learn/screens/PHPLevel";
 import NavigationHTML from "./src/navigation/NavigationHTML";
-import NavbarButtom from "./src/components/NavbarBottom";
+import NavbarButtom from "./src/componentsglobal/NavbarBottom";
 import HomeScreen from "./src/features/home/screens/HomeScreen";
+import LearningScreenHTML from "./src/features/learn/screens/LearningScreenHTML";
 import { ProgressProvider } from "./src/context/ProgressOverview";
 
 const Stack = createNativeStackNavigator();
@@ -54,6 +55,7 @@ export default function App() {
               <Stack.Screen name="PythonLevel" component={PythonLevel} />
               <Stack.Screen name="PHPLevel" component={PHPLevel} />
               <Stack.Screen name="NavigationHTML" component={NavigationHTML} />
+              <Stack.Screen name="LearningScreen" component={LearningScreenHTML} />
             </Stack.Navigator>
           </NavigationContainer>
           <StatusBar hidden={true} />

@@ -3,6 +3,7 @@ import { LivesContext } from "../context/LivesContext";
 import CorrectAnswer from "../sounds/CorrectAnswer";
 import WrongAnswer from "../sounds/WrongAnswer";
 import { useNavigation } from "@react-navigation/native";
+import AlertLife from "../features/learn/components/AlertLife";
 
 export const questionHandlers = (questions, onFinish) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Ionicons, Feather } from "@expo/vector-icons";
 import styles from "../style/LoginStyle";
 import listAccounts from "../../assets/data/accounts/acc.json";

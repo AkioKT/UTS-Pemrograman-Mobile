@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LearningHTML from "../features/learn/screens/HTML/LearningScreen";
+import LearningHTML from "../features/learn/screens/LearningScreenHTML";
 
 const Stack = createNativeStackNavigator();
 

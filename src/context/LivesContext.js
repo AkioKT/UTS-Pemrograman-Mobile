@@ -1,120 +1,123 @@
-import React, { createContext, useState, useEffect, useRef } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+  import React, { createContext, useState, useEffect, useRef } from "react";
+  import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const LivesContext = createContext();
+  export const LivesContext = createContext();
 
-export const LivesProvider = ({ children }) => {
-  const MAX_LIVES = 5;
-  const REGEN_TIME = 5 * 60 * 1000; // 5 menit dalam ms
+  export const LivesProvider = ({ children }) => {
+    const MAX_LIVES = 5;
+    const REGEN_TIME = 5 * 60 * 1000; // 5 menit dalam ms
 
-  const [lives, setLives] = useState(5);
-  const [nextLifeTime, setNextLifeTime] = useState(null);
-  const timerRef = useRef(null);
+    const [lives, setLives] = useState(5);
+    const [nextLifeTime, setNextLifeTime] = useState(null);
+    const timerRef = useRef(null);
 
-  // 🔹 Load lives & timer saat app dibuka
-  useEffect(() => {
-    const loadLives = async () => {
-      try {
-        const storedLives = await AsyncStorage.getItem("lives");
-        const storedTime = await AsyncStorage.getItem("nextLifeTime");
+    // 🔹 Load lives & timer saat app dibuka
+    useEffect(() => {
+      const loadLives = async () => {
+        try {
+          const storedLives = await AsyncStorage.getItem("lives");
+          const storedTime = await AsyncStorage.getItem("nextLifeTime");
 
-        if (storedLives !== null) setLives(parseInt(storedLives, 10));
+          if (storedLives !== null) setLives(parseInt(storedLives, 10));
 
-        if (storedTime) {
-          const time = parseInt(storedTime, 10);
+          if (storedTime) {
+            const time = parseInt(storedTime, 10);
 
-          // jika ada timer tersimpan, cek apakah sudah lewat
-          if (Date.now() >= time) {
-            restoreLivesFromTime(time);
-          } else {
-            setNextLifeTime(time);
-            startLifeRegenTimer(time);
+            // jika ada timer tersimpan, cek apakah sudah lewat
+            if (Date.now() >= time) {
+              restoreLivesFromTime(time);
+            } else {
+              setNextLifeTime(time);
+              startLifeRegenTimer(time);
+            }
+          }
+        } catch (error) {
+          console.log("Error loading lives:", error);
+        }
+      };
+
+      loadLives();
+    }, []);
+
+    // 🔹 Simpan setiap perubahan lives
+    useEffect(() => {
+      AsyncStorage.setItem("lives", lives.toString());
+    }, [lives]);
+
+    // ✅ Function: kurangi nyawa
+    const loseLife = async (amount = 1) => {
+      setLives((prev) => {
+        const updated = Math.max(prev - amount, 0);
+
+        if (prev > 0 && updated < prev) {
+          if (updated < MAX_LIVES && !nextLifeTime) {
+            const newTime = Date.now() + REGEN_TIME;
+            setNextLifeTime(newTime);
+            AsyncStorage.setItem("nextLifeTime", newTime.toString());
+            startLifeRegenTimer(newTime);
           }
         }
-      } catch (error) {
-        console.log("Error loading lives:", error);
-      }
+        return updated;
+      });
     };
 
-    loadLives();
-  }, []);
+    // ✅ Tambahkan nyawa
+    const addLife = (amount = 1, allowOverflow = false) => {
+      setLives((prev) => {
+        if (allowOverflow) return prev + amount; // 💥 override batas normal
+        return Math.min(prev + amount, MAX_LIVES);
+      });
+    };
 
-  // 🔹 Simpan setiap perubahan lives
-  useEffect(() => {
-    AsyncStorage.setItem("lives", lives.toString());
-  }, [lives]);
+    // ✅ Mulai timer regen
+    const startLifeRegenTimer = (time) => {
+      if (timerRef.current) clearInterval(timerRef.current);
 
-  // ✅ Function: kurangi nyawa
-  const loseLife = async (amount = 1) => {
-    setLives((prev) => {
-      const updated = Math.max(prev - amount, 0);
-
-      if (prev > 0 && updated < prev) {
-        if (updated < MAX_LIVES && !nextLifeTime) {
-          const newTime = Date.now() + REGEN_TIME;
-          setNextLifeTime(newTime);
-          AsyncStorage.setItem("nextLifeTime", newTime.toString());
-          startLifeRegenTimer(newTime);
+      timerRef.current = setInterval(() => {
+        if (Date.now() >= time) {
+          restoreLivesFromTime(time);
         }
-      }
-      return updated;
-    });
-  };
+      }, 1000);
+    };
 
-  // ✅ Tambahkan nyawa
-  const addLife = (amount = 1) => {
-    setLives((prev) => Math.min(prev + amount, MAX_LIVES));
-  };
+    // ✅ Hitung dan kembalikan nyawa berdasarkan waktu tersimpan
+    const restoreLivesFromTime = async (storedTime) => {
+      if (!storedTime) return;
 
-  // ✅ Mulai timer regen
-  const startLifeRegenTimer = (time) => {
-    if (timerRef.current) clearInterval(timerRef.current);
+      const diff = Date.now() - storedTime;
+      const livesToAdd = Math.floor(diff / REGEN_TIME) + 1;
 
-    timerRef.current = setInterval(() => {
-      if (Date.now() >= time) {
-        restoreLivesFromTime(time);
-      }
-    }, 1000);
-  };
+      setLives((prev) => {
+        const updated = Math.min(prev + livesToAdd, MAX_LIVES);
 
-  // ✅ Hitung dan kembalikan nyawa berdasarkan waktu tersimpan
-  const restoreLivesFromTime = async (storedTime) => {
-    if (!storedTime) return;
+        if (updated === MAX_LIVES) {
+          clearInterval(timerRef.current);
+          setNextLifeTime(null);
+          AsyncStorage.removeItem("nextLifeTime");
+          return updated;
+        }
 
-    const diff = Date.now() - storedTime;
-    const livesToAdd = Math.floor(diff / REGEN_TIME) + 1;
+        const newTime = storedTime + livesToAdd * REGEN_TIME;
+        setNextLifeTime(newTime);
+        AsyncStorage.setItem("nextLifeTime", newTime.toString());
+        startLifeRegenTimer(newTime);
 
-    setLives((prev) => {
-      const updated = Math.min(prev + livesToAdd, MAX_LIVES);
-
-      if (updated === MAX_LIVES) {
-        clearInterval(timerRef.current);
-        setNextLifeTime(null);
-        AsyncStorage.removeItem("nextLifeTime");
         return updated;
-      }
+      });
+    };
 
-      const newTime = storedTime + livesToAdd * REGEN_TIME;
-      setNextLifeTime(newTime);
-      AsyncStorage.setItem("nextLifeTime", newTime.toString());
-      startLifeRegenTimer(newTime);
+    // ✅ Reset nyawa (optional)
+    const resetLives = async () => {
+      setLives(MAX_LIVES);
+      setNextLifeTime(null);
+      await AsyncStorage.removeItem("nextLifeTime");
+    };
 
-      return updated;
-    });
+    return (
+      <LivesContext.Provider
+        value={{ lives, loseLife, addLife, nextLifeTime, resetLives }}
+      >
+        {children}
+      </LivesContext.Provider>
+    );
   };
-
-  // ✅ Reset nyawa (optional)
-  const resetLives = async () => {
-    setLives(MAX_LIVES);
-    setNextLifeTime(null);
-    await AsyncStorage.removeItem("nextLifeTime");
-  };
-
-  return (
-    <LivesContext.Provider
-      value={{ lives, loseLife, addLife, nextLifeTime, resetLives }}
-    >
-      {children}
-    </LivesContext.Provider>
-  );
-};

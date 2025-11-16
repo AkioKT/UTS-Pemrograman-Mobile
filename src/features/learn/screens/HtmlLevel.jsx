@@ -4,7 +4,7 @@ import {
   Text,
   ScrollView,
   StatusBar,
-  StyleSheet,
+  Image,
   TouchableOpacity,
   Pressable,
 } from "react-native";
@@ -13,12 +13,13 @@ import { useFonts } from "expo-font";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useCallback } from "react";
-import styles from "../../../../style/AllCategoryStyle";
+import styles from "../../../style/AllCategoryStyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { LivesContext } from "../../../../context/LivesContext";
+import { LivesContext } from "../../../context/LivesContext";
 import { useContext } from "react";
-import { ProgressContext } from "../../../../context/ProgressOverview";
-import LifeTimer from "../../../../components/LifeTimer";
+import { ProgressContext } from "../../../context/ProgressOverview";
+import LifeTimer from "../../../componentsglobal/LifeTimer";
+import BackgroundHTML from "../../../../assets/image/thumbnail_html.png";
 
 export default function HtmlLevel() {
   const { updateProgress } = useContext(ProgressContext);
@@ -29,11 +30,11 @@ export default function HtmlLevel() {
     { id: 3, completed: false, locked: true },
     { id: 4, completed: false, locked: true },
     { id: 5, completed: false, locked: true },
-    { id: 6, completed: false, locked: true },
-    { id: 7, completed: false, locked: true },
-    { id: 8, completed: false, locked: true },
-    { id: 9, completed: false, locked: true },
-    { id: 10, completed: false, locked: true },
+    // { id: 6, completed: false, locked: true },
+    // { id: 7, completed: false, locked: true },
+    // { id: 8, completed: false, locked: true },
+    // { id: 9, completed: false, locked: true },
+    // { id: 10, completed: false, locked: true },
   ]);
   const { lives } = useContext(LivesContext);
   useFocusEffect(
@@ -103,7 +104,7 @@ export default function HtmlLevel() {
   };
 
   const [fontsLoaded] = useFonts({
-    "Poppins-Regular": require("../../../../../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Regular": require("../../../../assets/fonts/Poppins-Regular.ttf"),
   });
   if (!fontsLoaded) {
     return null; // atau tampilkan splash/loading
@@ -111,6 +112,15 @@ export default function HtmlLevel() {
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
+      <Image
+        source={BackgroundHTML}
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          opacity: 0.2
+        }}
+      />
       {/* Unit Header */}
       <View style={styles.unitHeader}>
         <View style={styles.unitSubHeader}>

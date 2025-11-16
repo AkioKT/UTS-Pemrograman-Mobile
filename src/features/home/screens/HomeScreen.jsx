@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { LivesContext } from "../../../context/LivesContext"; // sesuaikan path
 // import untuk navigasi jika perlu
 import { useNavigation } from "@react-navigation/native";
-import AppBar from "../../../components/AppBar";
+import AppBar from "../../../componentsglobal/AppBar";
 import AnnouncementBanner from "../components/AnnouncementBanner";
 import QuickResumeCard from "../components/QuickResumeCard";
 import DailyQuest from "../components/DailyQuest";
@@ -24,11 +24,15 @@ import ProgressOverview from "../components/ProgressOverview";
 import RecommendedCourses from "../components/RecommendedCourse";
 import CodingTips from "../components/CodingTips";
 import MascotMessage from "../components/MascotMessage";
+import AlertAddLife from "../components/AlertAddLife";
 import styles from "../../../style/HomeScreenStyle";
 
 export default function HomeScreen() {
+  const [showAlert, setShowAlert] = useState(false);
+  const openLifeModal = () => setShowAlert(true);
+
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <AppBar />
       <ScrollView
         style={styles.container}
@@ -36,8 +40,8 @@ export default function HomeScreen() {
       >
         <AnnouncementBanner />
         <QuickResumeCard />
-        <DailyQuest />
         <WeeklyChallenge />
+        <DailyQuest onRewardHeart={openLifeModal} />
         <PracticeOfTheDay />
         <Leaderboard />
         <ProgressOverview />
@@ -46,6 +50,7 @@ export default function HomeScreen() {
         <MascotMessage />
         <View style={{ height: 80 }} />
       </ScrollView>
+      {showAlert && <AlertAddLife onClose={() => setShowAlert(false)} />}
     </View>
   );
 }

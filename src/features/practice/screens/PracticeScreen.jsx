@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import AppBar from "../../../components/AppBar";
+import AppBar from "../../../componentsglobal/AppBar";
 export default function HomeScreen() {
   return (
     <View>
