@@ -44,10 +44,8 @@ export default function HomeScreen() {
         <DailyQuest onRewardHeart={openLifeModal} />
         <PracticeOfTheDay />
         <Leaderboard />
-        <ProgressOverview />
         <RecommendedCourses />
-        <CodingTips />
-        <MascotMessage />
+        <ProgressOverview />
         <View style={{ height: 80 }} />
       </ScrollView>
       {showAlert && <AlertAddLife onClose={() => setShowAlert(false)} />}

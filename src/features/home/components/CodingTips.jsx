@@ -9,8 +9,6 @@ export default function CodingTips() {
     "Sematkan alt pada tag <img> untuk aksesibilitas.",
     "Gunakan semantic tags (<header>, <main>, <footer>) untuk struktur yang jelas.",
   ];
-  const fontsLoaded = useCustomFonts();
-  if (!fontsLoaded) return null;
   return (
     <View style={styles.card}>
       <WaveBackground
@@ -34,7 +32,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#1f2937",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   sectionTitle: {
     color: "#fff",

@@ -8,8 +8,7 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native"; // ⬅️ Import hook ini
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import useCustomFonts from "../../src/hooks/useCustomFonts";
 
 const ClassCard = ({ classData }) => {
   const navigation = useNavigation(); // ⬅️ Ambil objek navigation tanpa props
@@ -28,14 +27,8 @@ const ClassCard = ({ classData }) => {
       console.log("Halaman belum tersedia untuk:", classData.name);
     }
   };
-  const [fontsLoaded] = useFonts({
-    "Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
-    "Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null; // atau tampilkan splash/loading
-  }
+  const fontsLoaded = useCustomFonts();
+  if (!fontsLoaded) return null;
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
@@ -116,7 +109,6 @@ const styles = StyleSheet.create({
   },
   selectText: {
     color: "#282103",
-    // fontWeight: 600,
     fontFamily: "Poppins-Bold",
     fontSize: 16,
   },

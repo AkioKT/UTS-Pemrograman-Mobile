@@ -1,9 +1,9 @@
 import styles from "./styles/QuickResumeCard";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CircularDiagram from "../../../componentsglobal/CircularDiagram";
-import WaveBackground from "../hooks/WaveBackground";
+import ContinueCardIcon from "../../../../assets/image/continuecard-icon.png";
 import { useContext } from "react";
 import { ProgressContext } from "../../../context/ProgressOverview";
 import allLevels from "../../../../assets/data/HTML/AllLevel";
@@ -18,49 +18,33 @@ export default function QuickResumeCard() {
 
   return (
     <View style={styles.quickresumecard}>
-      <WaveBackground height={200}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginHorizontal: 10,
-            // backgroundColor: "red"
+      <Image source={ContinueCardIcon} style={{ width: "100%", height: 200 }} />
+      <View
+        style={{
+          width: "100%",
+          height: 200,
+          position: "absolute",
+          // backgroundColor: "red",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <TouchableOpacity
+          style={[styles.continueBtn]}
+          onPress={() => {
+            if (!recentActivity) return;
+            navigation.navigate("LearningScreen", {
+              levelId: recentActivity.levelId,
+            });
           }}
         >
-          <View>
-            <Text style={styles.cardTitle}>
-              {recentActivity?.course ?? "No recent session"}
-            </Text>
-            <Text style={styles.cardSub}>Level: {levelMinusOne}</Text>
-            <Text style={styles.cardSub}>Progress: {progress}%</Text>
-          </View>
-          <CircularDiagram progress={recentActivity?.progress ?? 0} />
-        </View>
-
-        <View
-          style={{
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <TouchableOpacity
-            style={[styles.continueBtn]}
-            onPress={() => {
-              if (!recentActivity) return;
-
-              navigation.navigate("LearningScreen", {
-                levelId: recentActivity.levelId,
-              });
-            }}
-          >
-            <Text style={[styles.continueText, { fontFamily: "Poppins-Bold" }]}>
-              Continue
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </WaveBackground>
+          <Text style={styles.cardTitle}>
+            {recentActivity?.course ?? "No recent"}
+          </Text>
+          <Text style={styles.cardSub}>Level: {levelMinusOne}</Text>
+          <Text style={styles.continueText}>Tap to continue</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

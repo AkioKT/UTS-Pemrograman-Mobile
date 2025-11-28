@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Svg, {
   Circle,
   G,
@@ -69,7 +68,7 @@ export default function CircularDiagram() {
           {/* Gradient Definition */}
           <Defs>
             <LinearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <Stop offset="0%" stopColor="#c073ffff" />
+              <Stop offset="0%" stopColor="#4573c9" />
               {/* <Stop offset="100%" stopColor="#4facfe" /> */}
             </LinearGradient>
           </Defs>

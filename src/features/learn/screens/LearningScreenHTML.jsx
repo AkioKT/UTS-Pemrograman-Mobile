@@ -68,11 +68,20 @@ export default function LearningScreen() {
 
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.closeButton} onPress={closeButton}>
-          <Text style={styles.closeIcon}>✕</Text>
-        </TouchableOpacity>
+        <View
+          style={{
+            flexDirection: "row",
+            width: "80%",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <TouchableOpacity style={styles.closeButton} onPress={closeButton}>
+            <Text style={styles.closeIcon}>✕</Text>
+          </TouchableOpacity>
 
-        <ProgressBar progress={progress} />
+          <ProgressBar progress={progress} />
+        </View>
 
         <View style={styles.livesContainer}>
           <LifeTimer />

@@ -15,34 +15,63 @@ export const ProgressProvider = ({ children }) => {
   // 🔥 NEW: recent activity
   const [recentActivity, setRecentActivity] = useState(null);
 
+  // Load stored progress & recent activity when app starts
   useEffect(() => {
     loadProgress();
     loadRecentActivity();
   }, []);
 
-  // LOAD SAVED PROGRESS
+  // ------------------------------------
+  // 🔹 LOAD SAVED PROGRESS
+  // ------------------------------------
   const loadProgress = async () => {
-    const saved = await AsyncStorage.getItem("progress");
-    if (saved) setProgress(JSON.parse(saved));
+    try {
+      const saved = await AsyncStorage.getItem("progress");
+      if (saved) {
+        console.log("Loaded progress:", saved);
+        setProgress(JSON.parse(saved));
+      }
+    } catch (error) {
+      console.log("Error loading progress:", error);
+    }
   };
 
-  // LOAD RECENT ACTIVITY
-  const loadRecentActivity = async () => {
-    const saved = await AsyncStorage.getItem("recentActivity");
-    if (saved) setRecentActivity(JSON.parse(saved));
-  };
-
-  // UPDATE PROGRESS PERSENTASE
+  // ------------------------------------
+  // 🔹 UPDATE PROGRESS AND SAVE IT
+  // ------------------------------------
   const updateProgress = async (category, percent) => {
-    const newProgress = { ...progress, [category]: percent };
-    setProgress(newProgress);
-    await AsyncStorage.setItem("progress", JSON.stringify(newProgress));
+    try {
+      const newProgress = { ...progress, [category]: percent };
+      setProgress(newProgress);
+      await AsyncStorage.setItem("progress", JSON.stringify(newProgress));
+      console.log("Progress saved:", newProgress);
+    } catch (error) {
+      console.log("Error saving progress:", error);
+    }
   };
 
-  // 🔥 NEW: UPDATE RECENT ACTIVITY
+  // ------------------------------------
+  // 🔹 LOAD RECENT ACTIVITY
+  // ------------------------------------
+  const loadRecentActivity = async () => {
+    try {
+      const saved = await AsyncStorage.getItem("recentActivity");
+      if (saved) setRecentActivity(JSON.parse(saved));
+    } catch (error) {
+      console.log("Error loading recent activity:", error);
+    }
+  };
+
+  // ------------------------------------
+  // 🔹 UPDATE RECENT ACTIVITY
+  // ------------------------------------
   const updateRecentActivity = async (data) => {
-    setRecentActivity(data);
-    await AsyncStorage.setItem("recentActivity", JSON.stringify(data));
+    try {
+      setRecentActivity(data);
+      await AsyncStorage.setItem("recentActivity", JSON.stringify(data));
+    } catch (error) {
+      console.log("Error saving recent activity:", error);
+    }
   };
 
   return (

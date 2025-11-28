@@ -13,9 +13,7 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
   KeyboardAvoidingView,
@@ -33,14 +31,14 @@ import Animated, {
 export default function GetStarted({ navigation }) {
   const [isLogin, setIsLogin] = useState(true);
   const highlightPos = useSharedValue(0);
+  const [tabWidth, setTabWidth] = useState(0);
 
   useEffect(() => {
     highlightPos.value = withTiming(isLogin ? 0 : 1, { duration: 200 });
   }, [isLogin]);
 
-  // Gerakkan highlight
   const highlightAnim = useAnimatedStyle(() => ({
-    transform: [{ translateX: highlightPos.value * 155 }], // 100 = width tab
+    transform: [{ translateX: highlightPos.value * tabWidth }],
   }));
 
   return (
@@ -56,11 +54,12 @@ export default function GetStarted({ navigation }) {
           keyboardShouldPersistTaps="handled"
         >
           {/* Toggle Tabs */}
-          <View style={styles.tabContainer}>
-            {/* Highlight Background Slider */}
+          <View
+            style={styles.tabContainer}
+            onLayout={(e) => setTabWidth(e.nativeEvent.layout.width / 2)}
+          >
             <Animated.View style={[styles.slider, highlightAnim]} />
 
-            {/* Sign In */}
             <TouchableOpacity
               onPress={() => setIsLogin(true)}
               activeOpacity={0.8}
@@ -71,7 +70,6 @@ export default function GetStarted({ navigation }) {
               </Text>
             </TouchableOpacity>
 
-            {/* Sign Up */}
             <TouchableOpacity
               onPress={() => setIsLogin(false)}
               activeOpacity={0.8}

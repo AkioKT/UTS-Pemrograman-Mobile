@@ -1,44 +1,57 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
+const SCALE = width / 380; // responsive scale
 
 export default StyleSheet.create({
   card: {
     backgroundColor: "#0f1724",
     borderRadius: 12,
     marginBottom: 12,
-    // height: 140,
+    justifyContent: "center",
+    alignItems: "center",
     borderWidth: 1,
     borderColor: "#1f2937",
     overflow: "hidden",
   },
   sectionTitle: {
     color: "#fff",
-    fontSize: 24,
-    fontFamily: "Poppins-Bold",
+    fontSize: 30 * SCALE,
+    fontFamily: "Pixel-Bold",
     marginBottom: 10,
+    textShadowColor: "#000", // warna stroke
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
   row: {
-    // backgroundColor: "red",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    marginBottom: 10,
-    // gap: 20
+    marginBottom: 6,
   },
   leaderIdx: {
     color: "#facc15",
     textAlign: "center",
-    fontFamily: "Poppins-Bold",
-    fontSize: 16,
+    fontFamily: "Pixel-Bold",
+    fontSize: 20 * SCALE,
+    textShadowColor: "#000", // warna stroke
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
   leaderName: {
     color: "#fff",
-    fontSize: 16,
-    fontFamily: "Poppins-Regular",
+    fontSize: 18 * SCALE,
+    fontFamily: "Pixel-Bold",
+    textShadowColor: "#000", // warna stroke
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
   leaderXp: {
-    color: "#9ca3af",
-    fontSize: 14,
-    fontFamily: "Poppins-Regular",
+    color: "#57f149",
+    fontSize: 18 * SCALE,
+    fontFamily: "Pixel-Bold",
+    textShadowColor: "#000", // warna stroke
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
 });

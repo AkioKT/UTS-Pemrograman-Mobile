@@ -1,7 +1,6 @@
 import styles from "./styles/Leaderboard";
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { View, Text } from "react-native";
-import WaveBackground from "../hooks/WaveBackground";
+import { View, Text, Image } from "react-native";
+import LeaderboardIcon from "../../../../assets/image/leaderboard-icon.png";
 import useCustomFonts from "../../../hooks/useCustomFonts";
 
 export default function Leaderboard() {
@@ -9,25 +8,32 @@ export default function Leaderboard() {
     { id: "u1", name: "Galang", xp: 980 },
     { id: "u2", name: "Nadia", xp: 920 },
     { id: "u3", name: "Sukma", xp: 880 },
+    { id: "u4", name: "Zahra", xp: 880 },
+    { id: "u5", name: "Aladawiyah", xp: 880 },
   ];
-  const fontsLoaded = useCustomFonts();
-  if (!fontsLoaded) return null;
   return (
     <View style={styles.card}>
-      <WaveBackground
-        height={160}
-        waveHeight="126%"
-        waveOpacity={{ w1: 0.5, w2: 0.25, w3: 0.18 }}
+      <Image
+        source={LeaderboardIcon}
+        style={{ width: "100%", height: 400, resizeMode: "cover" }}
       />
       <View
         style={{
           position: "absolute",
-          width: "100%",
-          padding: 10,
-          height: "100%",
+          width: 260,
+          paddingHorizontal: 12,
+          height: 250,
+          justifyContent: "center",
         }}
       >
-        <Text style={styles.sectionTitle}>Leaderboard</Text>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={styles.sectionTitle}>Leaderboard</Text>
+        </View>
         {leaderboardMock.map((u, idx) => (
           <View key={u.id} style={styles.row}>
             <View style={{ flexDirection: "row", gap: 10 }}>

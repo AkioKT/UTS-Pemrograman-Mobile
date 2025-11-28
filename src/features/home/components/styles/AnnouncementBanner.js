@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
+const SCALE = width / 400; // responsive scale
 
 const styles = StyleSheet.create({
   announcement: {
@@ -10,7 +12,7 @@ const styles = StyleSheet.create({
     gap: 10,
     alignItems: "center",
   },
-  announcementText: { color: "#fff", marginLeft: 8 },
+  announcementText: { color: "#fff", marginLeft: 8, fontSize: 14 * SCALE },
 });
 
 export default styles;

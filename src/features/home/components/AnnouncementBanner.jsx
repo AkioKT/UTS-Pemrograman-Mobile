@@ -30,7 +30,7 @@ export default function AnnouncementBanner() {
       }
     >
       <Ionicons name="megaphone-outline" size={18} color="#fff" />
-      <Text style={styles.announcementText}>
+      <Text style={styles.annouxncementText}>
         {announcements[announcementIndex].text}
       </Text>
     </TouchableOpacity>

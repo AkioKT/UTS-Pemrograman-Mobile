@@ -1,8 +1,11 @@
 import styles from "./styles/PracticeOfTheDay";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import WaveBackground from "../hooks/WaveBackground";
+import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
+import PracticeIcon from "../../../../assets/image/practice-icon.png";
 import useCustomFonts from "../../../hooks/useCustomFonts";
+
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const IMAGE_HEIGHT = SCREEN_WIDTH * 0.7; // responsive
 
 export default function PracticeOfTheDay() {
   const [practiceAnswer, setPracticeAnswer] = useState(null);
@@ -18,56 +21,80 @@ export default function PracticeOfTheDay() {
     choices: ["4", "'22'", "TypeError", "NaN"],
     answerIndex: 1,
   };
-  const fontsLoaded = useCustomFonts();
-  if (!fontsLoaded) return null;
   return (
     <View style={styles.card}>
-      <WaveBackground
-        height={330}
-        waveHeight="60%"
-        waveOpacity={{ w1: 0.5, w2: 0.25, w3: 0.18 }}
+      <Image
+        source={PracticeIcon}
+        style={{
+          width: "100%",
+          height: IMAGE_HEIGHT,
+          resizeMode: "cover",
+        }}
       />
+
+      {/* OVERLAY */}
       <View
         style={{
           position: "absolute",
-          zIndex: 1,
-          width: "100%",
-          paddingHorizontal: 10,
+          top: 10,
+          left: 10,
+          right: 10,
         }}
       >
         <Text style={styles.sectionTitle}>Practice of The Day</Text>
+
         <Text style={styles.cardSub}>{practiceOfDayMock.question}</Text>
-        {practiceOfDayMock.choices.map((c, i) => {
-          const isCorrect = i === practiceOfDayMock.answerIndex;
-          const isSelected = practiceAnswer === i;
-          const locked = practiceResult === "wrong";
 
-          return (
-            <TouchableOpacity
-              key={i}
-              disabled={locked}
-              style={[
-                styles.choiceBtn,
-                isSelected && styles.choiceSelected,
-                locked && isCorrect && { backgroundColor: "#19A974" }, // hijau
-                locked &&
-                  isSelected &&
-                  !isCorrect && { backgroundColor: "#B00020" }, // merah jika jawaban user salah
-              ]}
-              onPress={() => !locked && setPracticeAnswer(i)} // cegah memilih ulang
-            >
-              <Text style={styles.choiceText}>{c}</Text>
-            </TouchableOpacity>
-          );
-        })}
+        {/* CHOICES */}
+        <View
+          style={{
+            width: "100%",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            gap: 10,
+          }}
+        >
+          {practiceOfDayMock.choices.map((c, i) => {
+            const isCorrect = i === practiceOfDayMock.answerIndex;
+            const isSelected = practiceAnswer === i;
+            const locked = practiceResult === "wrong";
 
-        <View style={{ flexDirection: "row", gap: 8 }}>
+            return (
+              <TouchableOpacity
+                key={i}
+                disabled={locked}
+                style={[
+                  styles.choiceBtn,
+                  isSelected && styles.choiceSelected,
+                  locked && isCorrect && { backgroundColor: "#19A974" },
+                  locked &&
+                    isSelected &&
+                    !isCorrect && { backgroundColor: "#B00020" },
+                ]}
+                onPress={() => !locked && setPracticeAnswer(i)}
+              >
+                <Text style={styles.choiceText}>{c}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        {/* BUTTONS */}
+        <View
+          style={{
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 10,
+          }}
+        >
           <TouchableOpacity
             style={[
               styles.primaryBtn,
               practiceResult === "wrong" && { backgroundColor: "#777" },
             ]}
-            disabled={practiceResult === "wrong"} // sudah salah → tidak bisa submit lagi
+            disabled={practiceResult === "wrong"}
             onPress={submitPractice}
           >
             <Text style={styles.primaryBtnText}>Submit</Text>

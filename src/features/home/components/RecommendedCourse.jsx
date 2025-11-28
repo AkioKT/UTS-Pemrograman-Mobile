@@ -1,7 +1,7 @@
 import styles from "./styles/RecommendedCoursesStyle";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import WaveBackground from "../hooks/WaveBackground";
+import { View, Text, TouchableOpacity, FlatList, Image } from "react-native";
+import RecommendedIcon from "../../../../assets/image/recommended-icons.png";
 import useCustomFonts from "../../../hooks/useCustomFonts";
 
 export default function RecommendedCourses() {
@@ -17,13 +17,21 @@ export default function RecommendedCourses() {
   ];
   return (
     <View style={styles.card}>
-      <WaveBackground
-        height={150}
-        waveHeight="135%"
-        waveOpacity={{ w1: 0.5, w2: 0.25, w3: 0.18 }}
-      />
-      <View style={{ position: "absolute", width: "100%", zIndex: 1, padding: 10 }}>
-        <Text style={styles.sectionTitle}>Recommended for you</Text>
+      <Image source={RecommendedIcon} style={{ width: "100%", height: 200 }} />
+      <View
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          // justifyContent: "center",
+          // alignItems: "center",
+          zIndex: 1,
+          padding: 10,
+          // backgroundColor: "red",
+        }}
+      >
+        <Text style={styles.sectionTitle}>Recommended Course</Text>
+
         <FlatList
           horizontal
           data={recommendedMock}
@@ -36,7 +44,13 @@ export default function RecommendedCourses() {
                 navigation.navigate("MainTabs", { screen: "Learn" })
               }
             >
-              <Text style={styles.courseTitle}>{item.title}</Text>
+              <Text
+                style={styles.courseTitle}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {item.title}
+              </Text>
               <Text style={styles.courseLevel}>{item.level}</Text>
               <View style={styles.progressBarBg}>
                 <View
@@ -44,7 +58,11 @@ export default function RecommendedCourses() {
                     styles.progressBarFill,
                     { width: `${item.progress * 100}%` },
                   ]}
-                />
+                >
+                  {[...Array(20)].map((_, i) => (
+                    <View key={i} style={styles.stripe} />
+                  ))}
+                </View>
               </View>
             </TouchableOpacity>
           )}

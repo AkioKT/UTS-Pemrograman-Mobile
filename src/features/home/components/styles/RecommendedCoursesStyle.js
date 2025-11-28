@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
+const SCALE = width / 400; // responsive scale
 
 export default StyleSheet.create({
   card: {
@@ -7,40 +9,56 @@ export default StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#1f2937",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   sectionTitle: {
     color: "#fff",
-    fontSize: 24,
-    fontFamily: "Poppins-Bold",
+    fontSize: 26 * SCALE,
+    fontFamily: "Pixel-Bold",
     marginBottom: 10,
+    textShadowColor: "#000", // warna stroke
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
   courseCard: {
-    backgroundColor: "#071427",
+    backgroundColor: "#63331b",
     padding: 12,
     borderRadius: 10,
     marginRight: 12,
     width: 200,
+    height: 100,
   },
   courseTitle: {
     color: "#fff",
-    fontFamily: "Poppins-Regular",
-    fontSize: 16,
+    fontFamily: "Pixel-Bold",
+    fontSize: 20 * SCALE,
   },
   courseLevel: {
     color: "#9ca3af",
-    fontSize: 12,
-    fontFamily: "Poppins-Regular",
+    fontSize: 16 * SCALE,
+    fontFamily: "Pixel-Bold",
     marginBottom: 8,
   },
   progressBarBg: {
-    height: 12,
-    backgroundColor: "#111827",
-    borderRadius: 8,
+    width: "100%",
+    height: 25,
+    backgroundColor: "#63331b",
+    borderRadius: 2,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "#a8a8a87c",
+  },
+
+  progressBarFill: {
+    height: "100%",
+    flexDirection: "row",
     overflow: "hidden",
   },
-  progressBarFill: {
-    height: 12,
-    backgroundColor: "#facc15",
+
+  stripe: {
+    width: 16, // lebar garis hijau
+    backgroundColor: "rgba(61, 235, 61, 1)",
+    marginRight: 2, // jarak antar garis
+    borderRadius: 2,
   },
 });

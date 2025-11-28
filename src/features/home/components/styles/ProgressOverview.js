@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
+const SCALE = width / 400; // responsive scale
 
 export default StyleSheet.create({
   card: {
@@ -7,34 +9,54 @@ export default StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#1f2937",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   sectionTitle: {
     color: "#fff",
-    fontSize: 24,
-    fontFamily: "Poppins-Bold",
-    marginBottom: 10,
+    fontSize: 30 * SCALE,
+    fontFamily: "Pixel-Bold",
+    textShadowColor: "#000", // warna stroke
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
   row: {
     flexDirection: "row",
-    alignItems: "center",
+    // alignItems: "center",
     gap: 12,
-    justifyContent: "space-between",
+    // justifyContent: "space",
   },
   smallText: {
-    color: "#9ca3af",
-    fontSize: 12,
-    fontFamily: "Poppins-Regular"
+    color: "#fff",
+    fontSize: 16 * SCALE,
+    fontFamily: "Pixel-Regular",
+    textShadowColor: "#000", // warna stroke
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
   progressBarBg: {
-    height: 16,
-    backgroundColor: "#111827",
-    borderRadius: 8,
+    width: "100%",
+    height: 25,
+    backgroundColor: "#63331b", // coklat seperti gambar
+    borderRadius: 6,
     overflow: "hidden",
-    marginTop: 4,
   },
-  progressBarFill: {
-    height: 16,
-    backgroundColor: "#facc15",
+
+  progressBarStriped: {
+    flex: 1,
+    flexDirection: "row",
+  },
+
+  stripe: {
+    width: 16, // lebar garis hijau
+    backgroundColor: "rgba(61, 235, 61, 1)",
+    marginRight: 2, // jarak antar garis
+    borderRadius: 2,
+  },
+
+  progressCover: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
   },
 });

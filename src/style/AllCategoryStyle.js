@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+
 const styles = StyleSheet.create({
   container: {
     width: "100%",
     flex: 1,
     backgroundColor: "#020617",
-    position: "relative"
+    position: "relative",
   },
   header: {
     backgroundColor: "#020617",
@@ -75,16 +76,15 @@ const styles = StyleSheet.create({
   },
   unitHeader: {
     backgroundColor: "#020617",
-    paddingHorizontal: 24,
-    paddingVertical: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 14,
     flexDirection: "row",
     justifyContent: "space-between",
-    gap: 18,
     alignItems: "center",
   },
   unitSubHeader: {
     flexDirection: "row",
-    gap: 10,
+    gap: 14,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   livesContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     // backgroundColor: "#EC4899",
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -153,30 +154,29 @@ const styles = StyleSheet.create({
   },
   progressPath: {
     alignItems: "center",
-    paddingVertical: 32,
+    paddingVertical: 20,
     paddingHorizontal: 16,
     paddingBottom: 100,
+    flexGrow: 1,
   },
   levelContainer: {
     width: "100%",
     gap: 20,
-    // marginVertical: 20,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
+    // marginVertical: 20,
+    // justifyContent: "center",
   },
   levelLeft: {
     alignSelf: "flex-start",
-    marginLeft: 16,
+    // marginLeft: 16,
   },
   levelRight: {
     alignSelf: "flex-end",
-    marginRight: 32,
+    // marginRight: 32,
   },
   levelBox: {
-    width: "20%", // ± 4 item per baris (100 / 4 = 25%), dikurangi gap
     aspectRatio: 1,
-    height: 70,
     backgroundColor: "#fde047",
     borderRadius: 5,
     justifyContent: "center",
@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 8,
   },
+
   levelPressed: {
     transform: [{ scale: 0.9 }],
   },

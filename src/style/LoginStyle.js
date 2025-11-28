@@ -19,14 +19,14 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     flexDirection: "row",
-    // justifyContent: "center"
+    // justifyContent: "center",
     width: "100%",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderRadius: 12,
-    alignSelf: "center",
+    // alignSelf: "center",
     marginBottom: 20,
     position: "relative",
-    // overflow: "hidden",
+    overflow: "hidden",
   },
 
   slider: {

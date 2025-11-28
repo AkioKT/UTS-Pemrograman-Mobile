@@ -18,6 +18,14 @@ import NavbarButtom from "./src/componentsglobal/NavbarBottom";
 import HomeScreen from "./src/features/home/screens/HomeScreen";
 import LearningScreenHTML from "./src/features/learn/screens/LearningScreenHTML";
 import { ProgressProvider } from "./src/context/ProgressOverview";
+import { SettingsProvider } from "./src/context/SettingsContext";
+import DebugSettings from "./src/context/DebugSettings";
+import { StackScreen } from "react-native-screens";
+import ProfileScreen from "./src/features/profile/screens/ProfileScreen";
+import BattleLobby from "./src/battle/BattleLobby";
+import BattleRoom from "./src/battle/BattleRoom";
+import BattleScreen from "./src/battle/BattleScreen";
+import PracticeScreen from "./src/features/practice/screens/PracticeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,36 +40,56 @@ export default function App() {
   Text.defaultProps = Text.defaultProps || {};
   Text.defaultProps.style = { fontFamily: "Poppins" };
   return (
-    <LivesProvider>
-      <ProgressProvider>
-        <View style={styles.container}>
-          <NavigationContainer>
-            <Stack.Navigator
-              initialRouteName="GetStarted"
-              screenOptions={{
-                headerShown: false, // biar tampilan lebih bersih
-              }}
-            >
-              <Stack.Screen name="GetStarted" component={GetStarted} />
-              <Stack.Screen name="SelectCategory" component={SelectCategory} />
-              <Stack.Screen name="MainTabs" component={NavbarButtom} />
-              <Stack.Screen name="HomeScreen" component={HomeScreen} />
-              <Stack.Screen name="HtmlLevel" component={HtmlLevel} />
-              <Stack.Screen name="CssLevel" component={CssLevel} />
-              <Stack.Screen
-                name="JavascriptLevel"
-                component={JavascriptLevel}
-              />
-              <Stack.Screen name="PythonLevel" component={PythonLevel} />
-              <Stack.Screen name="PHPLevel" component={PHPLevel} />
-              <Stack.Screen name="NavigationHTML" component={NavigationHTML} />
-              <Stack.Screen name="LearningScreen" component={LearningScreenHTML} />
-            </Stack.Navigator>
-          </NavigationContainer>
-          <StatusBar hidden={true} />
-        </View>
-      </ProgressProvider>
-    </LivesProvider>
+    <SettingsProvider>
+      <LivesProvider>
+        <ProgressProvider>
+          <View style={styles.container}>
+            <NavigationContainer>
+              <Stack.Navigator
+                initialRouteName="GetStarted"
+                screenOptions={{
+                  headerShown: false, // biar tampilan lebih bersih
+                }}
+              >
+                <Stack.Screen name="GetStarted" component={GetStarted} />
+                <Stack.Screen
+                  name="SelectCategory"
+                  component={SelectCategory}
+                />
+                <Stack.Screen name="MainTabs" component={NavbarButtom} />
+                <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                <Stack.Screen name="HtmlLevel" component={HtmlLevel} />
+                <Stack.Screen name="CssLevel" component={CssLevel} />
+                <Stack.Screen
+                  name="JavascriptLevel"
+                  component={JavascriptLevel}
+                />
+                <Stack.Screen name="PythonLevel" component={PythonLevel} />
+                <Stack.Screen name="PHPLevel" component={PHPLevel} />
+                <Stack.Screen
+                  name="NavigationHTML"
+                  component={NavigationHTML}
+                />
+                <Stack.Screen
+                  name="LearningScreen"
+                  component={LearningScreenHTML}
+                />
+                <Stack.Screen name="PracticeScreen" component={PracticeScreen} />
+                <Stack.Screen
+                  name="BattleLobby"
+                  component={BattleLobby}
+                  options={{ headerShown: false }}
+                />
+
+                <Stack.Screen name="BattleRoom" component={BattleRoom} />
+                <Stack.Screen name="BattleScreen" component={BattleScreen} />
+              </Stack.Navigator>
+            </NavigationContainer>
+            <StatusBar hidden={true} />
+          </View>
+        </ProgressProvider>
+      </LivesProvider>
+    </SettingsProvider>
   );
 }
 

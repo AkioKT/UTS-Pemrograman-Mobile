@@ -28,7 +28,8 @@ export default function ProgressBar({ progress }) {
 
 const styles = StyleSheet.create({
   progressContainer: {
-    width: "60%",
+    // width: "100%",
+    flex: 1,
     height: 14,
     backgroundColor: "#e0e0e0",
     borderRadius: 8,

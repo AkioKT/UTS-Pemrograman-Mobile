@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Pressable,
+  useWindowDimensions,
 } from "react-native";
 import { Svg, Polyline, Path } from "react-native-svg";
 import { useFonts } from "expo-font";
@@ -22,6 +23,8 @@ import LifeTimer from "../../../componentsglobal/LifeTimer";
 import BackgroundHTML from "../../../../assets/image/thumbnail_html.png";
 
 export default function HtmlLevel() {
+  const { width } = useWindowDimensions();
+  const levelSize = Math.min(80, (width - 10 * 2 - 20 * 4) / 4);
   const { updateProgress } = useContext(ProgressContext);
   const navigation = useNavigation(); // ⬅️ Ambil objek navigation tanpa props
   const [levels, setLevels] = useState([
@@ -30,11 +33,11 @@ export default function HtmlLevel() {
     { id: 3, completed: false, locked: true },
     { id: 4, completed: false, locked: true },
     { id: 5, completed: false, locked: true },
-    // { id: 6, completed: false, locked: true },
-    // { id: 7, completed: false, locked: true },
-    // { id: 8, completed: false, locked: true },
-    // { id: 9, completed: false, locked: true },
-    // { id: 10, completed: false, locked: true },
+    { id: 6, completed: false, locked: true },
+    { id: 7, completed: false, locked: true },
+    { id: 8, completed: false, locked: true },
+    { id: 9, completed: false, locked: true },
+    { id: 10, completed: false, locked: true },
   ]);
   const { lives } = useContext(LivesContext);
   useFocusEffect(
@@ -119,7 +122,6 @@ export default function HtmlLevel() {
           width: "100%",
           height: "100%",
           opacity: 0.2,
-          
         }}
       />
       {/* Unit Header */}
@@ -155,7 +157,8 @@ export default function HtmlLevel() {
               onPress={() => handleLevelPress(level.id)}
               style={({ pressed }) => [
                 styles.levelBox,
-                pressed && styles.levelPressed, // efek aktif
+                pressed && styles.levelPressed,
+                { width: levelSize, height: levelSize },
               ]}
             >
               {level.locked ? (

@@ -13,13 +13,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // backgroundColor: "green",
     height: 80,
-    // paddingHorizontal: 16,
-    // paddingVertical: 12,
-    gap: 12,
   },
   closeButton: {
-    width: 40,
-    height: 40,
+    padding: 10,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -36,21 +32,20 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   progressBar: {
+    width: "100%",
     height: "100%",
     backgroundColor: "#84CC16",
     borderRadius: 8,
   },
   livesContainer: {
+    // width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: "#EC4899",
-    // width: 60,
-    // height: 40,
-    // paddingHorizontal: 12,
-    // paddingVertical: 6,
+    padding: 10,
     borderRadius: 12,
     gap: 4,
+    // backgroundColor: "green"
   },
   livesIcon: {
     fontSize: 18,
@@ -117,7 +112,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   optionsGap: {
-
     gap: 10,
   },
   optionsContainer: {

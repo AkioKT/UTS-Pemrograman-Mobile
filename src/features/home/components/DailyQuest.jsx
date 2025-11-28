@@ -1,9 +1,10 @@
 import styles from "./styles/DailyQuest";
 import React, { useContext, useState } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TouchableOpacity, Alert, Image } from "react-native";
 import { LivesContext } from "../../../context/LivesContext";
-import WaveBackground from "../hooks/WaveBackground";
+import DailyQuestIcon from "../../../../assets/image/dailyquest-icon.png";
 import useCustomFonts from "../../../hooks/useCustomFonts";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import AlertAddLife from "./AlertAddLife";
 
 export default function DailyQuest({ onRewardHeart }) {
@@ -32,9 +33,6 @@ export default function DailyQuest({ onRewardHeart }) {
     },
   ]);
 
-  const fontsLoaded = useCustomFonts();
-  if (!fontsLoaded) return null;
-
   const completeDailyQuest = (id) => {
     setDailyQuests((prev) =>
       prev.map((q) => (q.id === id ? { ...q, done: true } : q))
@@ -60,47 +58,59 @@ export default function DailyQuest({ onRewardHeart }) {
 
   return (
     <View style={styles.card}>
-      <WaveBackground height={190} waveHeight="107%" />
-
+      <Image source={DailyQuestIcon} style={{ flex: 1, width: "100%" }}></Image>
       <View
-        style={{ position: "absolute", zIndex: 1, width: "100%", padding: 10 }}
+        style={{
+          position: "absolute",
+          zIndex: 1,
+          width: "100%",
+          height: 300,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <Text style={styles.sectionTitle}>Daily Quest</Text>
-
-        {dailyQuests.map((q) => (
-          <View key={q.id} style={styles.questRow}>
-            <View style={{ flex: 1 }}>
-              <Text
-                style={[
-                  styles.questTitle,
-                  q.done && {
-                    textDecorationLine: "line-through",
-                    color: "#8b949e",
-                  },
-                ]}
-              >
-                {q.title}
-              </Text>
-              <Text style={styles.questReward}>{q.reward}</Text>
-            </View>
-
+        <View
+          style={{
+            width: "55%",
+            height: 300,
+            justifyContent: "center",
+            paddingHorizontal: 6,
+            // alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              borderBottomColor: "#171717",
+              borderBottomWidth: 1,
+              borderStyle: "dashed",
+            }}
+          >
+            <Text style={styles.sectionTitle}>Daily Quest</Text>
+          </View>
+          {dailyQuests.map((q) => (
             <TouchableOpacity
-              style={[
-                styles.questBtn,
-                q.done && { backgroundColor: "#2a2a2a" },
-              ]}
+              key={q.id}
+              style={[styles.questRow, q.done]}
               disabled={q.done}
               onPress={() => completeDailyQuest(q.id)}
             >
-              <Text style={styles.questBtnText}>
-                {q.done ? "Done" : "Claim"}
-              </Text>
+              <View style={{ flex: 1 }}>
+                <Text
+                  style={[
+                    styles.questTitle,
+                    q.done && {
+                      textDecorationLine: "line-through",
+                      color: "#8b949e",
+                    },
+                  ]}
+                >
+                  {q.title}
+                </Text>
+                <Text style={styles.questReward}>{q.reward}</Text>
+              </View>
             </TouchableOpacity>
-          </View>
-        ))}
-
-        {/* Optional menampilkan XP player */}
-        <Text style={{ color: "#fff", marginTop: 10 }}>Your XP: {xp}</Text>
+          ))}
+        </View>
       </View>
     </View>
   );

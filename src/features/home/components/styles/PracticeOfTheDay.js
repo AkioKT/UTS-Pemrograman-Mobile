@@ -1,66 +1,94 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
+const SCALE = width / 380; // responsive scale
 
 export default StyleSheet.create({
   card: {
-    // height: 340,
     backgroundColor: "#0f1724",
     borderRadius: 12,
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#1f2937",
     overflow: "hidden",
+    position: "relative",
   },
+
   sectionTitle: {
     color: "#fff",
-    fontSize: 24,
+    fontSize: 28 * SCALE,
     marginBottom: 8,
-    fontFamily: "Poppins-Bold",
+    fontFamily: "Pixel-Bold",
+    textShadowColor: "#000",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
+
   cardSub: {
     color: "#f9f9f9",
-    fontSize: 14,
+    fontSize: 14 * SCALE,
     marginBottom: 12,
-    fontFamily: "Poppins-Regular",
+    fontFamily: "Pixel-SemiBold",
+    textShadowColor: "#000",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
+
   choiceBtn: {
-    backgroundColor: "#0b1220",
-    padding: 10,
+    width: "48%", // tetap aman karena kamu pakai gap 10
+    backgroundColor: "#0b12208f",
+    padding: 10 * SCALE,
     borderRadius: 4,
-    marginVertical: 6,
   },
+
   choiceSelected: {
     borderWidth: 1,
-    borderColor: "#facc15",
+    borderColor: "#d53fffff",
   },
+
   choiceText: {
     color: "#fff",
-    fontFamily: "Poppins-Regular",
+    fontSize: 15 * SCALE,
+    fontFamily: "Pixel-SemiBold",
+    textShadowColor: "#000",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
+
   primaryBtn: {
-    backgroundColor: "#facc15",
+    backgroundColor: "#4bdd55ff",
     borderRadius: 4,
-    width: 80,
+    width: "48%",
+    paddingVertical: 8 * SCALE,
     justifyContent: "center",
     alignItems: "center",
   },
+
   primaryBtnText: {
     color: "#121212",
-    fontSize: 14,
-    fontFamily: "Poppins-Regular",
+    fontSize: 16 * SCALE,
+    fontFamily: "Pixel-SemiBold",
+    textShadowColor: "#fff",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
+
   ghostBtn: {
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 4,
-    width: 80,
-    height: 40,
+    width: "48%",
+    paddingVertical: 8 * SCALE,
     justifyContent: "center",
     alignItems: "center",
   },
+
   ghostBtnText: {
     color: "#fff",
-    fontSize: 14,
-    fontFamily: "Poppins-Regular",
+    fontSize: 16 * SCALE,
+    fontFamily: "Pixel-SemiBold",
+    textShadowColor: "#000",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
   correctText: {
     color: "#4ade80",

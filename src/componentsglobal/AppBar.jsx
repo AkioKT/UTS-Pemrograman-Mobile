@@ -5,13 +5,6 @@ import LifeTimer from "./LifeTimer";
 
 const AppBar = () => {
   // const [lives, setLives] = useState(3);
-  const [fontsLoaded] = useFonts({
-    "Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null; // atau tampilkan splash/loading
-  }
   return (
     <View style={[styles.appBar, { fontFamily: "Poppins-Thin" }]}>
       <View style={styles.titleContainer}>

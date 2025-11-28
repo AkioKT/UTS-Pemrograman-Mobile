@@ -1,8 +1,8 @@
 import styles from "./styles/ProgressOverview";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { useContext, useMemo } from "react";
 import { ProgressContext } from "../../../context/ProgressOverview";
-import WaveBackground from "../hooks/WaveBackground";
+import ProgressIcon from "../../../../assets/image/progress-icon.png";
 import useCustomFonts from "../../../hooks/useCustomFonts";
 
 export default function ProgressOverview() {
@@ -17,28 +17,62 @@ export default function ProgressOverview() {
 
   return (
     <View style={styles.card}>
-      <WaveBackground
-        height={310}
-        waveHeight="65%"
-        waveOpacity={{ w1: 0.5, w2: 0.25, w3: 0.18 }}
+      <Image
+        source={ProgressIcon}
+        style={{ width: "100%", height: 300, opacity: 0.8 }}
       />
       <View style={{ position: "absolute", width: "100%", padding: 10 }}>
         <Text style={styles.sectionTitle}>Progress Overview</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            marginTop: 10,
+          }}
+        >
+          {Object.entries(progress).map(([category, value]) => (
+            <View
+              key={category}
+              style={{
+                width: "48%", // <<--- ini membuat 2 item per baris
+                marginBottom: 12,
+              }}
+            >
+              <View style={styles.row}>
+                <Text style={styles.smallText}>{category}</Text>
+              </View>
 
-        {Object.entries(progress).map(([category, value]) => (
-          <View key={category} style={{ marginBottom: 8 }}>
-            <View style={styles.row}>
-              <Text style={styles.smallText}>{category}</Text>
-              <Text style={styles.smallText}>{Math.round(value * 100)}%</Text>
+              <View style={styles.progressBarBg}>
+                <View
+                  style={{
+                    width: `${value * 100}%`,
+                    height: "100%",
+                    overflow: "hidden",
+                    flexDirection: "row",
+                  }}
+                >
+                  {/* STRIPES */}
+                  {[...Array(20)].map((_, i) => (
+                    <View key={i} style={styles.stripe} />
+                  ))}
+                </View>
+                <View
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    justifyContent: "center",
+                    position: "absolute",
+                  }}
+                >
+                  <Text style={[styles.smallText, { textAlign: "center" }]}>
+                    {Math.round(value * 100)}%
+                  </Text>
+                </View>
+              </View>
             </View>
-
-            <View style={styles.progressBarBg}>
-              <View
-                style={[styles.progressBarFill, { width: `${value * 100}%` }]}
-              />
-            </View>
-          </View>
-        ))}
+          ))}
+        </View>
 
         <Text style={styles.smallText}>Overall: {totalProgressPercent}%</Text>
       </View>

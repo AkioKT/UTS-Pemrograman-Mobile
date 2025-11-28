@@ -18,6 +18,9 @@ export default function useCustomFonts() {
     "Poppins-SemiBold": require("../../assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
     "Poppins-ExtraBold": require("../../assets/fonts/Poppins-ExtraBold.ttf"),
+    "Pixel-Regular": require("../../assets/fonts/PixelifySans-Regular.ttf"),
+    "Pixel-Bold": require("../../assets/fonts/PixelifySans-SemiBold.ttf"),
+    "Pixel-SemiBold": require("../../assets/fonts/PixelifySans-Bold.ttf"),
   });
 
   useEffect(() => {

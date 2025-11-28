@@ -1,7 +1,7 @@
 import styles from "./styles/WeeklyChallenge";
 import React from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
-import WaveBackground from "../hooks/WaveBackground";
+import { View, Text, TouchableOpacity, Alert, Image } from "react-native";
+import WeeklyChallengeIcon from "../../../../assets/image/weeklychallenge-icon.png";
 import useCustomFonts from "../../../hooks/useCustomFonts";
 
 export default function WeeklyChallenge() {
@@ -11,8 +11,6 @@ export default function WeeklyChallenge() {
     reward: "Badge: Frontender",
     progress: 0.3,
   };
-  const fontsLoaded = useCustomFonts();
-  if (!fontsLoaded) return null;
 
   return (
     <TouchableOpacity
@@ -20,61 +18,29 @@ export default function WeeklyChallenge() {
       onPress={() => Alert.alert("Weekly Challenge", weeklyChallengeMock.title)}
       activeOpacity={0.8}
     >
-      <WaveBackground
-        height={110}
-        // colors={["#533483", "#6D44B8", "#8E5CF3"]}
-        waveHeight="180%"
-        waveOpacity={{ w1: 0.5, w2: 0.25, w3: 0.18 }}
-      />
+      <Image
+        source={WeeklyChallengeIcon}
+        style={{ width: "100%", height: 120 }}
+      ></Image>
       {/* CONTENT */}
       <View style={{ width: 300, position: "absolute", top: 10, left: 10 }}>
-        <Text
-          style={[
-            styles.sectionTitle,
-            { color: "white", fontFamily: "Poppins-Bold" },
-          ]}
-        >
-          Weekly Challenge
-        </Text>
+        <Text style={styles.sectionTitle}>Weekly Challenge</Text>
         <View style={{ gap: 6 }}>
-          <Text
-            style={[
-              styles.cardSub,
-              { color: "white", fontFamily: "Poppins-Regular" },
-            ]}
-          >
-            {weeklyChallengeMock.title}
-          </Text>
+          <Text style={styles.cardSub}>{weeklyChallengeMock.title}</Text>
 
           {/* PROGRESS BAR */}
-          <View
-            style={[
-              styles.progressBarBg,
-              { backgroundColor: "rgba(255,255,255,0.2)" },
-            ]}
-          >
+          <View style={styles.progressBarBg}>
             <View
               style={[
                 styles.progressBarFill,
                 {
                   width: `${weeklyChallengeMock.progress * 100}%`,
-                  backgroundColor: "#a78bfa",
                 },
               ]}
             />
           </View>
 
-          <Text
-            style={[
-              styles.smallText,
-              {
-                // marginTop: 6,
-                color: "white",
-                fontFamily: "Poppins-Regular",
-                opacity: 0.8,
-              },
-            ]}
-          >
+          <Text style={styles.smallText}>
             Reward: {weeklyChallengeMock.reward}
           </Text>
         </View>

@@ -2,8 +2,6 @@ import { View, Text, StyleSheet } from "react-native";
 import WaveBackground from "../hooks/WaveBackground";
 import useCustomFonts from "../../../hooks/useCustomFonts";
 export default function MascotMessage() {
-  const fontsLoaded = useCustomFonts();
-  if (!fontsLoaded) return null;
   return (
     <View style={[styles.card]}>
       <WaveBackground
@@ -12,7 +10,14 @@ export default function MascotMessage() {
         waveHeight="185%"
         waveOpacity={{ w1: 0.5, w2: 0.25, w3: 0.18 }}
       />
-      <View style={{ flexDirection: "row", alignItems: "center", position: "absolute", padding: 10 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          position: "absolute",
+          padding: 10,
+        }}
+      >
         <View style={{ flex: 1 }}>
           <Text style={styles.cardTitle}>Codey says</Text>
           <Text style={styles.cardSub}>
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#1f2937",
-    overflow: "hidden"
+    overflow: "hidden",
   },
 
   mascotCard: {
@@ -41,12 +46,12 @@ const styles = StyleSheet.create({
   cardTitle: {
     color: "#f9f9f9",
     fontSize: 30,
-    fontFamily: "Poppins-Bold"
+    fontFamily: "Poppins-Bold",
   },
 
   cardSub: {
     color: "#f9f9f9",
     fontSize: 14,
-    fontFamily: "Poppins-Regular"
+    fontFamily: "Poppins-Regular",
   },
 });

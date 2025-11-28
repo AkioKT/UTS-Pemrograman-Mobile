@@ -9,7 +9,7 @@ export default function WaveBackground({
   height = "100%",
   waveHeight = "100%",
   waveOpacity = { w1: 0.3, w2: 0.2, w3: 0.15 },
-  colors = ["#1A1A2E", "#16213E", "#533483"],
+  colors = ["#1A1A2E", "#16213E", "#345083"],
   style,
 }) {
   const { translateX1, translateX2, translateX3 } = useWavesAnimation();

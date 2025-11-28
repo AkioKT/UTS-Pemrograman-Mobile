@@ -1,0 +1,131 @@
+[
+  {
+    "id": 1,
+    "image": "./images/question-6.1.png",
+    "questionText": "Which HTML tag is semantically most appropriate for wrapping self-contained content, such as a blog post or news article?",
+    "options": [
+      { "id": 1, "text": "<section>" },
+      { "id": 2, "text": "<article>" },
+      { "id": 3, "text": "<div>" },
+      { "id": 4, "text": "<main>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 2,
+    "text": "Atribut <input> mana yang harus digunakan untuk memungkinkan pengguna memilih satu opsi dari serangkaian opsi yang saling eksklusif (mutually exclusive)?",
+    "questionText": "Which <input> attribute must be used to allow users to select only one option from a set of mutually exclusive options?",
+    "options": [
+      { "id": 1, "text": "type=\"checkbox\"" },
+      { "id": 2, "text": "type=\"select\"" },
+      { "id": 3, "text": "type=\"radio\"" },
+      { "id": 4, "text": "type=\"option\"" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 3,
+    "text": "Dalam struktur tabel HTML, tag mana yang digunakan untuk mengelompokkan baris header?",
+    "questionText": "In HTML table structure, which tag is used to group the header rows?",
+    "options": [
+      { "id": 1, "text": "<tr>" },
+      { "id": 2, "text": "<header>" },
+      { "id": 3, "text": "<th>" },
+      { "id": 4, "text": "<thead>" }
+    ],
+    "correctAnswer": 4
+  },
+  {
+    "id": 4,
+    "text": "Atribut mana pada tag <a> yang digunakan untuk memastikan tautan dibuka di tab atau jendela browser baru?",
+    "questionText": "Which attribute on the <a> tag is used to ensure the link opens in a new browser tab or window?",
+    "options": [
+      { "id": 1, "text": "newtab=\"true\"" },
+      { "id": 2, "text": "target=\"_self\"" },
+      { "id": 3, "text": "target=\"_blank\"" },
+      { "id": 4, "text": "rel=\"noopener\"" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 5,
+    "text": "Apa elemen yang paling tepat untuk mendefinisikan bagian navigasi utama di situs web (seperti menu link)?",
+    "questionText": "What is the most appropriate element for defining the main navigation section of a website (like a link menu)?",
+    "options": [
+      { "id": 1, "text": "<menu>" },
+      { "id": 2, "text": "<nav>" },
+      { "id": 3, "text": "<header>" },
+      { "id": 4, "text": "<ul>" }
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 6,
+    "text": "Deklarasi <meta> mana yang harus digunakan di bagian <head> untuk menetapkan set karakter standar (character set) yang digunakan di HTML5?",
+    "questionText": "Which <meta> declaration should be used in the <head> section to set the standard character set used in HTML5?",
+    "options": [
+      { "id": 1, "text": "<meta name=\"charset\" content=\"UTF-8\">" },
+      {
+        "id": 2,
+        "text": "<meta http-equiv=\"Content-Type\" content=\"text/html\">"
+      },
+      { "id": 3, "text": "<meta charset=\"UTF-8\">" },
+      { "id": 4, "text": "<meta encoding=\"UTF-8\">" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 7,
+    "text": "Atribut <input> mana yang dapat Anda gunakan untuk membuat sebuah field (kolom) formulir wajib diisi sebelum formulir dapat dikirimkan (submit)?",
+    "questionText": "Which <input> attribute can you use to make a form field mandatory before the form can be submitted?",
+    "options": [
+      { "id": 1, "text": "mandatory" },
+      { "id": 2, "text": "validate" },
+      { "id": 3, "text": "required" },
+      { "id": 4, "text": "mustfill" }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 8,
+    "text": "Dalam konteks penggunaan CSS, apa fungsi utama dari atribut class pada elemen HTML?",
+    "questionText": "In the context of using CSS, what is the main function of the class attribute on HTML elements?",
+    "options": [
+      {
+        "id": 1,
+        "text": "Memberikan nama unik pada elemen untuk styling spesifik."
+      },
+      { "id": 2, "text": "Menentukan perilaku elemen melalui JavaScript." },
+      { "id": 3, "text": "Menerapkan gaya yang sama ke banyak elemen." },
+      {
+        "id": 4,
+        "text": "Menambahkan data tambahan yang tidak terlihat oleh pengguna."
+      }
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 9,
+    "text": "Untuk menautkan file stylesheet (CSS) eksternal ke dokumen HTML, tag apa yang harus digunakan di bagian <head>?",
+    "questionText": "To link an external stylesheet (CSS) file to an HTML document, which tag should be used in the <head> section?",
+    "options": [
+      { "id": 1, "text": "<style>" },
+      { "id": 2, "text": "<import>" },
+      { "id": 3, "text": "<src>" },
+      { "id": 4, "text": "<link>" }
+    ],
+    "correctAnswer": 4
+  },
+  {
+    "id": 10,
+    "text": "Atribut mana yang harus digunakan pada tag <form> untuk menentukan cara data formulir dikirimkan (misalnya, terlihat di URL atau disembunyikan dalam body permintaan)?",
+    "questionText": "Which attribute must be used on the <form> tag to specify how form data is submitted (e.g., visible in the URL or hidden in the request body)?",
+    "options": [
+      { "id": 1, "text": "action" },
+      { "id": 2, "text": "target" },
+      { "id": 3, "text": "method" },
+      { "id": 4, "text": "encode" }
+    ],
+    "correctAnswer": 3
+  }
+]
