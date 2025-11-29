@@ -2,10 +2,11 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Audio } from "expo-av";
 import { useFonts } from "expo-font";
 import { LivesProvider } from "./src/context/LivesContext";
 import * as NavigationBar from "expo-navigation-bar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import GetStarted from "./src/GetStarted";
 import SelectCategory from "./src/features/learn/screens/SelectCategory";
 import HtmlLevel from "./src/features/learn/screens/HtmlLevel";
@@ -30,6 +31,32 @@ import PracticeScreen from "./src/features/practice/screens/PracticeScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  // const [sound, setSound] = useState();
+
+  // async function playMusic() {
+  //   const { sound } = await Audio.Sound.createAsync(
+  //     require("./assets/sounds/Boba_Date.mp3"),
+  //     {
+  //       volume: 0.2,
+  //       isLooping: true,
+  //       shouldPlay: true,
+  //     }
+  //   );
+
+  //   setSound(sound);
+  //   await sound.playAsync();
+  // }
+
+  // useEffect(() => {
+  //   playMusic();
+
+  //   return () => {
+  //     if (sound) {
+  //       sound.unloadAsync(); // cleanup agar tidak double play
+  //     }
+  //   };
+  // }, []);
+
   useEffect(() => {
     NavigationBar.setVisibilityAsync("hidden"); // sembunyikan bar bawah
     NavigationBar.setBehaviorAsync("overlay-swipe"); // tetap bisa swipe untuk munculkan
@@ -43,50 +70,42 @@ export default function App() {
     <SettingsProvider>
       <LivesProvider>
         <ProgressProvider>
-          <View style={styles.container}>
-            <NavigationContainer>
-              <Stack.Navigator
-                initialRouteName="GetStarted"
-                screenOptions={{
-                  headerShown: false, // biar tampilan lebih bersih
-                }}
-              >
-                <Stack.Screen name="GetStarted" component={GetStarted} />
-                <Stack.Screen
-                  name="SelectCategory"
-                  component={SelectCategory}
-                />
-                <Stack.Screen name="MainTabs" component={NavbarButtom} />
-                <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                <Stack.Screen name="HtmlLevel" component={HtmlLevel} />
-                <Stack.Screen name="CssLevel" component={CssLevel} />
-                <Stack.Screen
-                  name="JavascriptLevel"
-                  component={JavascriptLevel}
-                />
-                <Stack.Screen name="PythonLevel" component={PythonLevel} />
-                <Stack.Screen name="PHPLevel" component={PHPLevel} />
-                <Stack.Screen
-                  name="NavigationHTML"
-                  component={NavigationHTML}
-                />
-                <Stack.Screen
-                  name="LearningScreen"
-                  component={LearningScreenHTML}
-                />
-                <Stack.Screen name="PracticeScreen" component={PracticeScreen} />
-                <Stack.Screen
-                  name="BattleLobby"
-                  component={BattleLobby}
-                  options={{ headerShown: false }}
-                />
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="GetStarted"
+              screenOptions={{
+                headerShown: false, // biar tampilan lebih bersih
+              }}
+            >
+              <Stack.Screen name="GetStarted" component={GetStarted} />
+              <Stack.Screen name="SelectCategory" component={SelectCategory} />
+              <Stack.Screen name="MainTabs" component={NavbarButtom} />
+              <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen name="HtmlLevel" component={HtmlLevel} />
+              <Stack.Screen name="CssLevel" component={CssLevel} />
+              <Stack.Screen
+                name="JavascriptLevel"
+                component={JavascriptLevel}
+              />
+              <Stack.Screen name="PythonLevel" component={PythonLevel} />
+              <Stack.Screen name="PHPLevel" component={PHPLevel} />
+              <Stack.Screen name="NavigationHTML" component={NavigationHTML} />
+              <Stack.Screen
+                name="LearningScreen"
+                component={LearningScreenHTML}
+              />
+              <Stack.Screen name="PracticeScreen" component={PracticeScreen} />
+              <Stack.Screen
+                name="BattleLobby"
+                component={BattleLobby}
+                options={{ headerShown: false }}
+              />
 
-                <Stack.Screen name="BattleRoom" component={BattleRoom} />
-                <Stack.Screen name="BattleScreen" component={BattleScreen} />
-              </Stack.Navigator>
-            </NavigationContainer>
+              <Stack.Screen name="BattleRoom" component={BattleRoom} />
+              <Stack.Screen name="BattleScreen" component={BattleScreen} />
+            </Stack.Navigator>
             <StatusBar hidden={true} />
-          </View>
+          </NavigationContainer>
         </ProgressProvider>
       </LivesProvider>
     </SettingsProvider>

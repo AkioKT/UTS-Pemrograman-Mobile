@@ -10,15 +10,40 @@ import {
   Dimensions,
 } from "react-native";
 import { initSocket, getSocket } from "./socket";
-const character = {
-  1: require("../../assets/image/chibi-male-1.png"),
-  2: require("../../assets/image/chibi-male-2.png"),
-  3: require("../../assets/image/chibi-female-1.png"),
-  4: require("../../assets/image/chibi-female-2.png"),
-  5: require("../../assets/image/chibi-female-3.png"),
-  6: require("../../assets/image/chibi-female-4.png"),
-  7: require("../../assets/image/chibi-male-3.png"),
-  8: require("../../assets/image/chibi-male-4.png"),
+import ButtonClick from "../sounds/ButtonClick";
+export const character = {
+  1: {
+    image: require("../../assets/image/chibi-male-1.png"),
+    name: "Rai",
+  },
+  2: {
+    image: require("../../assets/image/chibi-male-2.png"),
+    name: "Ken",
+  },
+  3: {
+    image: require("../../assets/image/chibi-female-1.png"),
+    name: "Mira",
+  },
+  4: {
+    image: require("../../assets/image/chibi-female-2.png"),
+    name: "Luna",
+  },
+  5: {
+    image: require("../../assets/image/chibi-female-3.png"),
+    name: "Saki",
+  },
+  6: {
+    image: require("../../assets/image/chibi-female-4.png"),
+    name: "Aira",
+  },
+  7: {
+    image: require("../../assets/image/chibi-male-3.png"),
+    name: "Hiro",
+  },
+  8: {
+    image: require("../../assets/image/chibi-male-4.png"),
+    name: "Zane",
+  },
 };
 
 const { width } = Dimensions.get("window");
@@ -26,14 +51,14 @@ export default function BattleRoom({ navigation, route }) {
   const { roomId, user } = route.params;
   const [room, setRoom] = useState(null);
   const socket = getSocket() || initSocket();
+  const isHost = socket.id === room?.host;
   const startBattle = () => {
-    if (!room || !socket) return;
-
-    if (socket.id !== room.host) {
-      return alert("Hanya host yang bisa memulai battle!");
-    }
-
     socket.emit("start_battle", { roomId });
+    ButtonClick();
+  };
+  const readyBattle = () => {
+    socket.emit("player_ready", { roomId });
+    ButtonClick();
   };
 
   const backPage = () => {
@@ -43,21 +68,25 @@ export default function BattleRoom({ navigation, route }) {
     if (socket && room && socket.id === room.host) {
       socket.emit("leave_room", { roomId });
       navigation.navigate("BattleLobby");
+      ButtonClick();
       return;
     }
     // PLAYER biasa
     if (socket) {
       socket.emit("leave_room", { roomId });
       navigation.navigate("BattleLobby");
+      ButtonClick();
     }
+    
   };
 
   useEffect(() => {
     socket.on("room_update", (summary) => {
+      console.log("UPDATE:", summary.players);
       if (!summary) return;
       summary.players = summary.players.map((p) => ({
         ...p,
-        avatar: Number(p.avatar) || 1, // fallback default
+        avatar: Number(p.avatar), // fallback default
       }));
       setRoom(summary);
     });
@@ -70,8 +99,12 @@ export default function BattleRoom({ navigation, route }) {
       navigation.goBack();
     });
     // request update
+
     socket.emit("join_room", { roomId, user });
     socket.emit("get_room");
+    if (socket.id === room?.host) {
+      socket.emit("player_ready", { roomId });
+    }
 
     return () => {
       socket.off("room_update");
@@ -82,7 +115,7 @@ export default function BattleRoom({ navigation, route }) {
 
   return (
     <View style={s.container}>
-      <Text style={[s.title, {fontSize: 30}]}>Coding Battle</Text>
+      <Text style={[s.title, { fontSize: 30 }]}>Coding Battle</Text>
       <Text style={s.title}>Room: {roomId}</Text>
 
       <FlatList
@@ -98,12 +131,24 @@ export default function BattleRoom({ navigation, route }) {
         renderItem={({ item }) => (
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <Text
-              style={{ color: "#fff", fontFamily: "Pixel-Bold", fontSize: 16 }}
+              style={{ color: "#fff", fontFamily: "Pixel-Bold", fontSize: 20 }}
             >
               {item.name}
             </Text>
+            <Text
+              style={{
+                color: item.ready ? "#4caf50" : "#de1111",
+                fontSize: 16,
+                marginTop: 4,
+                fontFamily: "Pixel-Bold",
+              }}
+            >
+              {character[item.avatar]?.name} -{" "}
+              {item.ready ? "Ready" : "Not Ready"}
+            </Text>
+
             <Image
-              source={character[item.avatar]}
+              source={character[item.avatar].image}
               style={{ width: 180, height: 180 }}
               resizeMode="contain"
             />
@@ -118,9 +163,23 @@ export default function BattleRoom({ navigation, route }) {
       />
 
       <View style={s.btnWrap}>
-        <TouchableOpacity style={s.btn} onPress={startBattle}>
-          <Text style={s.btntxt}>Start Battle</Text>
-        </TouchableOpacity>
+        {isHost && user.ready ? (
+          <TouchableOpacity style={s.btn} onPress={startBattle}>
+            <Text style={s.btntxt}>Start Battle</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={[
+              s.btn,
+              { backgroundColor: user.ready ? "#ffffff6f" : "#4caf50" },
+            ]}
+            disabled={user.ready}
+            onPress={readyBattle}
+          >
+            <Text style={s.btntxt}>Ready</Text>
+          </TouchableOpacity>
+        )}
+
         <TouchableOpacity style={s.btnBack} onPress={backPage}>
           <Text style={s.btntxt}>Back</Text>
         </TouchableOpacity>

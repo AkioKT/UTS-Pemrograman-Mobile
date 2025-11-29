@@ -18,6 +18,7 @@ import { initSocket, getSocket } from "./socket";
 import { Ionicons } from "@expo/vector-icons";
 import useCustomFonts from "../../src/hooks/useCustomFonts";
 import SelectCharacter from "../sounds/SelectCharacter";
+import ButtonClick from "../sounds/ButtonClick";
 const { width } = Dimensions.get("window");
 const character = {
   1: require("../../assets/image/chibi-male-1.png"),
@@ -41,7 +42,12 @@ export default function BattleLobby({ navigation, route }) {
   const fontsLoaded = useCustomFonts();
   if (!fontsLoaded) return null;
 
-  const backPage = () => navigation.goBack();
+  const backPage = () => {
+    navigation.navigate("MainTabs", {
+      screen: "Practice",
+    });
+    ButtonClick();
+  };
   const floatAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.loop(
@@ -116,7 +122,7 @@ export default function BattleLobby({ navigation, route }) {
     });
 
     console.log("Emit create_room:", id, selectedAvatar);
-
+    ButtonClick();
     // Jangan navigasi di sini
   };
 
@@ -174,6 +180,7 @@ export default function BattleLobby({ navigation, route }) {
     });
 
     console.log("Emit join_room:", roomId, selectedAvatar);
+    ButtonClick();
   };
 
   return (
@@ -296,7 +303,7 @@ export default function BattleLobby({ navigation, route }) {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ gap: 10 }}
+            contentContainerStyle={{ gap: 4 }}
           >
             {Object.keys(character).map((key) => (
               <TouchableOpacity

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useCustomFonts from "../../../hooks/useCustomFonts";
+import ButtonClick from "../../../sounds/ButtonClick";
 const { width } = Dimensions.get("window");
 const character = {
   1: require("../../../../assets/image/chibi-male-1.png"),
@@ -50,7 +51,7 @@ export default function PracticeScreen({ navigation }) {
       name: "Player1", // bisa diganti sesuai login
       avatar: avatarKey,
     };
-
+    ButtonClick();
     navigation.navigate("BattleLobby", { user });
   };
 
@@ -98,7 +99,15 @@ export default function PracticeScreen({ navigation }) {
             </ScrollView>
           </View>
         </View>
-        {/* Start Button */}
+        <View
+          style={{
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{fontFamily: "Pixel-Bold", fontSize: 24, color: "#fff"}}>- - - Coming Soon - - -</Text>
+        </View>
       </ScrollView>
       <TouchableOpacity
         style={{

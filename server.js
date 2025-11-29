@@ -76,9 +76,10 @@ io.on("connection", (socket) => {
       socketId: socket.id,
       id: user.id,
       name: user.name,
-      avatar: user.avatar, // 🔥 penting, jangan lupa
+      avatar: user.avatar,
       score: 0,
       hp: 3,
+      ready: true, // <-- tambah
     });
 
     socket.join(roomId);
@@ -91,14 +92,15 @@ io.on("connection", (socket) => {
   // JOIN ROOM
   socket.on("join_room", ({ roomId, user }) => {
     const room = rooms[roomId];
-    if (!room) return socket.emit("error_msg", "Room not found");
+    if (!room) return;
     room.players.set(socket.id, {
       socketId: socket.id,
       id: user.id,
       name: user.name,
-      avatar: user.avatar, // 🔥 pastikan avatar diterima server
+      avatar: user.avatar,
       score: 0,
       hp: 3,
+      ready: socket.id === room.host ? true : false, // <-- tambah ini
     });
 
     socket.join(roomId);
@@ -106,22 +108,25 @@ io.on("connection", (socket) => {
   });
 
   // start battle (by host)
+  // start battle (by host) — terima acknowledgement callback (ack)
   socket.on("start_battle", ({ roomId }) => {
     const room = rooms[roomId];
-    if (!room) {
-      console.log("Room not found:", roomId);
-      return;
-    }
+    if (!room) return;
 
     if (socket.id !== room.host) {
       socket.emit("error_msg", "Only host can start");
       return;
     }
 
-    const startTime = Date.now() + 3000;
+    const allReady = [...room.players.values()].every((p) => p.ready === true);
+    if (!allReady) {
+      socket.emit("error_msg", "Semua pemain harus ready!");
+      return;
+    }
 
-    room.startTime = startTime;
     room.state = "starting";
+    const startTime = Date.now() + 3000;
+    room.startTime = startTime;
 
     io.to(roomId).emit("battle_starting", { startTime });
 
@@ -191,6 +196,16 @@ io.on("connection", (socket) => {
       }
     }
   });
+  socket.on("player_ready", ({ roomId }) => {
+    const room = rooms[roomId];
+    if (!room) return;
+
+    const player = room.players.get(socket.id);
+    if (!player) return;
+
+    player.ready = true;
+    io.to(roomId).emit("room_update", roomSummary(roomId));
+  });
 });
 
 function roomSummary(roomId) {
@@ -202,6 +217,7 @@ function roomSummary(roomId) {
     score: p.score,
     hp: p.hp,
     avatar: p.avatar, // pastikan avatar dikirim
+    ready: p.ready,
   }));
   return {
     roomId,
