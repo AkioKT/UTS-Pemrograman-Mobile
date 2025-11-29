@@ -15,6 +15,10 @@ const character = {
   2: require("../../assets/image/chibi-male-2.png"),
   3: require("../../assets/image/chibi-female-1.png"),
   4: require("../../assets/image/chibi-female-2.png"),
+  5: require("../../assets/image/chibi-female-3.png"),
+  6: require("../../assets/image/chibi-female-4.png"),
+  7: require("../../assets/image/chibi-male-3.png"),
+  8: require("../../assets/image/chibi-male-4.png"),
 };
 
 const { width } = Dimensions.get("window");
@@ -26,7 +30,7 @@ export default function BattleRoom({ navigation, route }) {
     if (!room || !socket) return;
 
     if (socket.id !== room.host) {
-      return Alert.alert("Hanya host yang bisa memulai battle!");
+      return alert("Hanya host yang bisa memulai battle!");
     }
 
     socket.emit("start_battle", { roomId });
@@ -50,12 +54,14 @@ export default function BattleRoom({ navigation, route }) {
 
   useEffect(() => {
     socket.on("room_update", (summary) => {
+      if (!summary) return;
       summary.players = summary.players.map((p) => ({
         ...p,
-        avatar: Number(p.avatar), // convert string → number
+        avatar: Number(p.avatar) || 1, // fallback default
       }));
       setRoom(summary);
     });
+
     socket.on("battle_starting", ({ startTime }) => {
       navigation.navigate("BattleScreen", { roomId, user, startTime });
     });
@@ -76,36 +82,36 @@ export default function BattleRoom({ navigation, route }) {
 
   return (
     <View style={s.container}>
+      <Text style={[s.title, {fontSize: 30}]}>Coding Battle</Text>
       <Text style={s.title}>Room: {roomId}</Text>
 
       <FlatList
         data={room?.players ?? []}
-        keyExtractor={(p) => p.id}
-        horizontal={true}
+        keyExtractor={(p) => p.id || p.socketId}
+        horizontal
         contentContainerStyle={{
           width: "100%",
-          justifyContent: "center", // mengatur item di dalam scroll
-          alignItems: "center", // mengatur item di dalam scroll
-          // backgroundColor: "red",
+          justifyContent: "center",
+          // backgroundColor: "red"
+          // alignItems: "center",
         }}
         renderItem={({ item }) => (
-          <View
-            style={{
-              // flex: 1,
-              // width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              // padding: 6,
-              // backgroundColor: "red",
-            }}
-          >
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Text
+              style={{ color: "#fff", fontFamily: "Pixel-Bold", fontSize: 16 }}
+            >
+              {item.name}
+            </Text>
             <Image
-              source={character[item.avatar]} // gunakan key avatar dari server
-              style={{ maxWidth: 200, height: 200 }}
+              source={character[item.avatar]}
+              style={{ width: 180, height: 180 }}
               resizeMode="contain"
             />
-            <Text style={{ color: "#fff" }}>
-              {item.name} (score: {item.score || 0})
+
+            <Text
+              style={{ color: "#fff", fontFamily: "Pixel-Bold", fontSize: 20 }}
+            >
+              (score: {item.score || 0})
             </Text>
           </View>
         )}
@@ -132,10 +138,10 @@ const s = StyleSheet.create({
 
   title: {
     fontSize: 26,
-    fontWeight: "bold",
+    fontFamily: "Pixel-Bold",
     color: "#fff",
     textAlign: "center",
-    marginBottom: 20,
+    // marginBottom: 20,
   },
 
   playersLabel: {

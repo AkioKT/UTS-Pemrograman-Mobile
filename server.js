@@ -92,10 +92,6 @@ io.on("connection", (socket) => {
   socket.on("join_room", ({ roomId, user }) => {
     const room = rooms[roomId];
     if (!room) return socket.emit("error_msg", "Room not found");
-
-    if (room.players.size >= 2) {
-      return socket.emit("error_msg", "Room sudah penuh");
-    }
     room.players.set(socket.id, {
       socketId: socket.id,
       id: user.id,
